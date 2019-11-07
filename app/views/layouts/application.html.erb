@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SmallMouth</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./footerFixed.js"></script>
+  </head>
+
+  <body>
+  <header>
+      ヘッダー
+  </header>
+
+    <%= yield %>
+
+  <footer id="footer">
+    <div>フッター</div>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+find_executable: checking for brew... -------------------- yes
+
+--------------------
+
+find_executable: checking for clang... -------------------- yes
+
+--------------------
+
+find_executable: checking for pkg-config... -------------------- yes
+
+--------------------
+
+configure_compile_options: checking for outdated ImageMagick version (<= 6.7.7)... -------------------- no
+
+Detected ImageMagick version: 6.9.10
+--------------------
+
+have_macro: checking for __GNUC__... -------------------- yes
+
+"clang -o conftest -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/x86_64-darwin19 -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/ruby/backward -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0 -I.  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6 conftest.c  -L. -L/Users/takahashitomoya/.rbenv/versions/2.6.3/lib  -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16    -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16  -lruby.2.6-static -framework Security -framework Foundation -lpthread -ldl -lobjc   "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+"clang -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/x86_64-darwin19 -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/ruby/backward -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0 -I.  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6   -c conftest.c"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: #ifndef __GNUC__
+5: # error
+6: |:/ === __GNUC__ undefined === /:|
+7: #endif
+/* end */
+
+--------------------
+
+assert_minimum_ruby_version!: checking for Ruby version >= 2.3.0... -------------------- yes
+
+--------------------
+
+have_header: checking for magick/MagickCore.h... -------------------- yes
+
+"clang -E -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/x86_64-darwin19 -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/ruby/backward -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0 -I.  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6 -std=gnu99  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <magick/MagickCore.h>
+/* end */
+
+--------------------
+
+have_func: checking for GetImageChannelEntropy() in assert.h,ctype.h,stdio.h,stdlib.h,math.h,time.h,sys/types.h,magick/MagickCore.h... -------------------- yes
+
+"clang -o conftest -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/x86_64-darwin19 -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/ruby/backward -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0 -I.  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6 -std=gnu99 conftest.c  -L. -L/Users/takahashitomoya/.rbenv/versions/2.6.3/lib  -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16    -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16  -lruby.2.6-static -framework Security -framework Foundation -lpthread -ldl -lobjc   "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <assert.h>
+ 4: #include <ctype.h>
+ 5: #include <stdio.h>
+ 6: #include <stdlib.h>
+ 7: #include <math.h>
+ 8: #include <time.h>
+ 9: #include <sys/types.h>
+10: #include <magick/MagickCore.h>
+11: 
+12: /*top*/
+13: extern int t(void);
+14: int main(int argc, char **argv)
+15: {
+16:   if (argc > 1000000) {
+17:     int (* volatile tp)(void)=(int (*)(void))&t;
+18:     printf("%d", (*tp)());
+19:   }
+20: 
+21:   return 0;
+22: }
+23: int t(void) { void ((*volatile p)()); p = (void ((*)()))GetImageChannelEntropy; return !p; }
+/* end */
+
+--------------------
+
+have_func: checking for SetImageGray() in assert.h,ctype.h,stdio.h,stdlib.h,math.h,time.h,sys/types.h,magick/MagickCore.h... -------------------- yes
+
+"clang -o conftest -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/x86_64-darwin19 -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0/ruby/backward -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include/ruby-2.6.0 -I.  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6  -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6 -std=gnu99 conftest.c  -L. -L/Users/takahashitomoya/.rbenv/versions/2.6.3/lib  -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16    -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16  -lruby.2.6-static -framework Security -framework Foundation -lpthread -ldl -lobjc   "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <assert.h>
+ 4: #include <ctype.h>
+ 5: #include <stdio.h>
+ 6: #include <stdlib.h>
+ 7: #include <math.h>
+ 8: #include <time.h>
+ 9: #include <sys/types.h>
+10: #include <magick/MagickCore.h>
+11: 
+12: /*top*/
+13: extern int t(void);
+14: int main(int argc, char **argv)
+15: {
+16:   if (argc > 1000000) {
+17:     int (* volatile tp)(void)=(int (*)(void))&t;
+18:     printf("%d", (*tp)());
+19:   }
+20: 
+21:   return 0;
+22: }
+23: int t(void) { void ((*volatile p)()); p = (void ((*)()))SetImageGray; return !p; }
+/* end */
+
+--------------------
+
+extconf.h is:
+/* begin */
+ 1: #ifndef EXTCONF_H
+ 2: #define EXTCONF_H
+ 3: #define HAVE_MAGICK_MAGICKCORE_H 1
+ 4: #define HAVE_GETIMAGECHANNELENTROPY 1
+ 5: #define HAVE_SETIMAGEGRAY 1
+ 6: #define RUBY_VERSION_STRING ruby 2.6.3
+ 7: #define RMAGICK_VERSION_STRING RMagick 4.0.0
+ 8: #define IMAGEMAGICK_GREATER_THAN_EQUAL_6_8_9 1
+ 9: #define IMAGEMAGICK_GREATER_THAN_EQUAL_6_9_0 1
+10: #endif
+/* end */
+
+
+
+======================================================================
+Thu 07 Nov 19 12:10:01
+This installation of RMagick 4.0.0 is configured for
+Ruby 2.6.3 (x86_64-darwin19) and ImageMagick 6.9.10
+======================================================================
+
+
+Configured compile options: {:magick_version=>"6.9.10", :local_libs=>" -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16", :cflags=>" -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6 -std=gnu99", :cppflags=>" -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6", :ldflags=>" -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16", :defs=>[], :config_h=>"Makefile rmagick.h"}
