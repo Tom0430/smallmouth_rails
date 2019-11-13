@@ -7,19 +7,40 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./footerFixed.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
-  <header>
-      ヘッダー
-  </header>
+
+    <nav>
+    <div class="nav-wrapper #fbc02d yellow darken-2">
+      <a href="#" class="brand-logo right">Small Mouth</a>
+      <% if user_signed_in? %>
+        <ul>
+          <li><%= link_to "マイページ", user_path(current_user.id), class: "glyphicon glyphicon-user", style: "font-size: 14px;" %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"glyphicon glyphicon-log-out" %></li>
+          <li><%= current_user.name %></li>
+        </ul>
+      <% else %>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><%= link_to "新規会員登録", new_user_registration_path %></li>
+          <li><%= link_to "ログイン", new_user_session_path %></li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
 
     <%= yield %>
 
-  <footer id="footer">
-    <div>フッター</div>
+  <footer class="#fbc02d yellow darken-2">
+    <p class="footer-text">フッター</p>
   </footer>
+    <!--JavaScript at end of body for optimized loading-->
   </body>
 </html>
+

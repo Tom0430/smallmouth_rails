@@ -1,0 +1,10 @@
+<h2>goals</h2>
+
+<% @goals.each do |goal| %>
+    <%= link_to goal_path(goal.id) do %>
+        <%= goal.title %>
+        <%= goal.detail %>
+    <% end %>
+    <%= goal.limit_time.strftime("%Y-%m-%d %H:%M:%S") %>
+    <hr>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_07_043302) do
+ActiveRecord::Schema.define(version: 2019_11_07_091614) do
 
   create_table "comments", force: :cascade do |t|
     t.string "user_id"
@@ -21,17 +21,16 @@ ActiveRecord::Schema.define(version: 2019_11_07_043302) do
   end
 
   create_table "goals", force: :cascade do |t|
-    t.string "user_id"
-    t.string "title"
-    t.string "detail"
-    t.boolean "achieved"
-    t.datetime "limit_time"
+    t.string "user_id", null: false
+    t.string "title", null: false
+    t.string "detail", null: false
+    t.boolean "achieved", default: false, null: false
+    t.datetime "limit_time", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "progresses", force: :cascade do |t|
-    t.string "user_id"
     t.string "goal_id"
     t.string "body"
     t.string "progress_image"

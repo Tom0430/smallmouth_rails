@@ -1,0 +1,41 @@
+<body>
+<%= @goal.title %>
+<%= @goal.detail %>
+
+<section><p>あと<span id = "timer"></span>でチャレンジ終了！</p></section>
+<%= link_to"新", new_goal_path %>
+</body>
+
+
+<script>
+    var limit = new Date("<%= @goal.limit_time %>");
+    var countdown = function(due) {
+        var now = new Date();
+
+        var rest = due.getTime() - now.getTime();
+        var sec = Math.floor(rest / 1000 % 60);
+        var min = Math.floor(rest / 1000 / 60) % 60;
+        var hours = Math.floor(rest / 1000 / 60 / 60) % 24;
+        var days = Math.floor(rest/ 1000 / 60 / 60 / 24 )
+        var count = [days, hours, min, sec ];
+
+        return count;
+    }
+
+
+    var recale = function() {
+    var counter = countdown(limit);
+    var time = counter[0] + '日' + counter[1] + '時間' + counter[2] + '分' +counter[3] + '秒';
+    document.getElementById('timer').textContent = time;
+    refresh();
+    finish();
+    }
+
+    var refresh = function() {
+        setTimeout(recale,1000)
+    }
+    var finish = function() {
+        setTimeout(console.log("チャレンジ終了"),limit)
+    }
+    recale();
+    </script>

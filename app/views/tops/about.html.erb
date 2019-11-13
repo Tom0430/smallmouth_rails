@@ -1,7 +1,20 @@
-<h1>SmallMouthへようこそ</h1>
-<p>SmallMouthに遊びにきてくれてありがとうございます。<br>
-    このサイトは、小さな目標を達成するためのサイトです。<br>
-    やらなきゃいけないことなんだけど中々手が出ない...<br>
-    そんな時はここに投稿して、たくさんの人に”やるぞ！”と宣言しちゃいましょう！<br>
-    大口を叩くような無茶はせず、小さなことからコツコツとこなして行きませんか？
-</p>
+<h1>about</h1>
+      <%
+=begin%>
+ cssで使う時はimage-urlってなる  
+<%
+=end%>
+<div class="col s12 m8 offset-m2 l6 offset-l3">
+  <div class="card-panel grey lighten-5 z-depth-1">
+    <div class="row valign-wrapper">
+      <div class="col s2">
+          <%= image_tag image_url('tamago.jpeg'), class:"circle responsive-img" %>
+      </div>
+      <div class="col s10">
+        <span class="black-text">
+          This is a square image. Add the "circle" class to it to make it appear circular.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
