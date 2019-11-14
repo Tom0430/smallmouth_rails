@@ -4,7 +4,11 @@
     <%= link_to goal_path(goal.id) do %>
         <%= goal.title %>
         <%= goal.detail %>
+        <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
     <% end %>
-    <%= goal.limit_time.strftime("%Y-%m-%d %H:%M:%S") %>
     <hr>
 <% end %>
+
+
+
+<%= link_to"新しい目標を立てる", new_goal_path %>

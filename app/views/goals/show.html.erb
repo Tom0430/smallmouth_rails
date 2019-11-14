@@ -2,40 +2,52 @@
 <%= @goal.title %>
 <%= @goal.detail %>
 
-<section><p>あと<span id = "timer"></span>でチャレンジ終了！</p></section>
+<section><p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p></section>
+
+<div><%= link_to "達成できた", goal_achieved_path(@goal.id) %></div>
+<div class="failed-text"><%= link_to "達成できなかった", goal_failed_path(@goal.id) %></div>
+
 <%= link_to"新", new_goal_path %>
+
 </body>
 
 
 <script>
-    var limit = new Date("<%= @goal.limit_time %>");
-    var countdown = function(due) {
+    // カウントダウンタイマー
+    var limit = new Date("<%= @goal.remaining_time %>");
+    var countdown = function(limit_due) {
         var now = new Date();
-
-        var rest = due.getTime() - now.getTime();
+        // modelの値(不変) - 今の時刻(どんどん増えてく。ブラウザの更新によらない)
+        var rest = limit_due.getTime() - now.getTime();
         var sec = Math.floor(rest / 1000 % 60);
         var min = Math.floor(rest / 1000 / 60) % 60;
         var hours = Math.floor(rest / 1000 / 60 / 60) % 24;
         var days = Math.floor(rest/ 1000 / 60 / 60 / 24 )
-        var count = [days, hours, min, sec ];
+        var count_hash = {days: days, hours: hours, min: min, sec: sec}
 
-        return count;
+        return count_hash;
     }
 
-
+    //var failed_text = document.getElementsById("aaa");
+    var failed_text = document.getElementsByClassName("failed-text");
     var recale = function() {
-    var counter = countdown(limit);
-    var time = counter[0] + '日' + counter[1] + '時間' + counter[2] + '分' +counter[3] + '秒';
-    document.getElementById('timer').textContent = time;
-    refresh();
-    finish();
+        var counter = countdown(limit);
+        if(counter["days"] <= 0 && counter["hours"] <= 0 && counter["min"] <= 0 && counter["sec"] <= 0){
+            document.getElementById('timer-text').textContent = "チャレンジ終了！達成できましたか？";
+            failed_text[0].style.display = "block";
+            return
+        }
+        else{
+            one_second_recale_refresh();
+        }
+        var time = counter["days"] + '日' + counter["hours"] + '時間' + counter["min"] + '分' + counter["sec"] + '秒';
+        document.getElementById('timer').textContent = time;
     }
 
-    var refresh = function() {
-        setTimeout(recale,1000)
+    var one_second_recale_refresh = function() {
+        setTimeout(recale, 1000)
     }
-    var finish = function() {
-        setTimeout(console.log("チャレンジ終了"),limit)
-    }
+
     recale();
-    </script>
+
+</script>

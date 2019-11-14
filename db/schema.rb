@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2019_11_07_091614) do
     t.string "user_id", null: false
     t.string "title", null: false
     t.string "detail", null: false
-    t.boolean "achieved", default: false, null: false
-    t.datetime "limit_time", null: false
+    t.integer "status", default: 0, null: false
+    t.integer "limit_time", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

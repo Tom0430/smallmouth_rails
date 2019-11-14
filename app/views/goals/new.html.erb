@@ -7,15 +7,8 @@
 <%= f.text_area :detail %>
 <hr>
 
-<% now = Time.now  %>
-<% limit30s = now + 30 %>
-<% limit6h = now + 60 * 60 * 6 %>
-<% limit1d = now + 60 * 60 * 24 %>
-<% limit3d = now + 60 * 60 * 72 %>
-<% limit7d = now + 60 * 60 * 168 %>
-<hr>
 
-<%= f.select :limit_time, [['30秒後',limit30s], ['６時間後', limit6h ], ['１日後まで',limit1d ], ['3日後まで',limit3d ], ['7日後まで',limit7d ]],
+<%= f.select :limit_time, [['30秒後',"limit30s"], ['６時間後', "limit6h" ], ['１日後まで',"limit1d" ], ['3日後まで',"limit3d" ], ['7日後まで',"limit7d" ], ['5秒後まで',"limit5s" ], ['１分後まで',"limit1m" ]],
 {include_blank: '期限はいつまで？'}, class: 'limit_box' %>
 
 <%= f.submit "絶対にやり遂げよう！" %>
