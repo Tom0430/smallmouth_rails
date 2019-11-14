@@ -1,5 +1,14 @@
 ---
 ja:
+  enums:
+    goal:
+      limit_time:
+        limit30s: "30秒"
+        limit6h: "6時間"
+        limit1d: "24時間"
+        limit3d: "3日間"
+        limit1w: "1週間"
+        limit5s: "5秒間"
   activerecord:
     errors:
       messages:

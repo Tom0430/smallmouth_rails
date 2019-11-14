@@ -2,12 +2,25 @@
 <%= @goal.title %>
 <%= @goal.detail %>
 
-<section><p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p></section>
+<p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
 
 <div><%= link_to "達成できた", goal_achieved_path(@goal.id) %></div>
 <div class="failed-text"><%= link_to "達成できなかった", goal_failed_path(@goal.id) %></div>
 
-<%= link_to"新", new_goal_path %>
+<% @goal.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.body %>
+    <hr>
+<% end %>
+
+<%= link_to"新規目標", new_goal_path %>
+
+<%= form_for [@goal, @comment] do |f| %>
+    <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+    <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+<% end %>
+
+
 
 </body>
 

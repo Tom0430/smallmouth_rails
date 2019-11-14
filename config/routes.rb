@@ -4,9 +4,9 @@ Rails.application.routes.draw do
  resources :users
   resources :goals do
     # get :achieved, on: :collection
-    get '/:id/achieved' => 'goals#achieved', as: 'achieved'
-    get '/:id/failed' => 'goals#failed', as: 'failed'
-  resource :commments, only:[:create, :destroy]
+    get '/achieved' => 'goals#achieved', as: 'achieved'
+    get '/failed' => 'goals#failed', as: 'failed'
+  resource :comments, only:[:create, :destroy]
   resource :progresses, only:[:create, :destroy]
   resource :rates, only:[:create, :destroy]
   end
