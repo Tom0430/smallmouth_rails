@@ -2,10 +2,13 @@
 
 <% @goals.each do |goal| %>
     <%= link_to user_goal_path(goal.user.id, goal.id) do %>
-        <%= goal.title %>
-        <%= goal.detail %>
-        <span><%= goal.user.name %>さん</span>
-        <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        <div>
+            <%= image_tag goal.user.image.url, size:'100x100' %>
+            <span><%= goal.user.name %>さん</span>
+            <%= goal.title %>
+            <%= goal.detail %>
+            <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        </div>
     <% end %>
     <hr>
 <% end %>

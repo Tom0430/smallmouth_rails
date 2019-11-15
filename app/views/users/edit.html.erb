@@ -9,6 +9,15 @@
     <hr>
     <%= f.label :"プロフィール画像"%>
     <%= f.file_field :image %>
+    <% if @user.image? %>
+        <%= image_tag @user.image.thumb.url %>
+    <% else %>
+        <%
+=begin%>
+ <%= image_tag 'noimage.' %> 
+<%
+=end%>
+    <% end %>
     <hr>
     <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %> 
 <% end %>
