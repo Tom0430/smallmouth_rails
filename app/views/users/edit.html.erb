@@ -1,0 +1,14 @@
+<h2>ユーザー情報編集</h2>
+
+ <%= form_for(@user) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <hr>
+    <%= f.label :"自己紹介" %>
+    <%= f.text_area :profile_text %>
+    <hr>
+    <%= f.label :"プロフィール画像"%>
+    <%= f.file_field :image %>
+    <hr>
+    <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %> 
+<% end %>

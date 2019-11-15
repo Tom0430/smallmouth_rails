@@ -22,6 +22,7 @@ class GoalsController < ApplicationController
         @user = current_user
         @goal = Goal.find(params[:id])
         @comment = Comment.new
+        @progress = Progress.new
     end
 
     def achieved
