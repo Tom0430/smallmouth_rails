@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 end
 
 get '/goals', to: 'goals#index', as: 'goals'
+# get '/user/:id/edit', to: 'goals#index', as: 'goals'
 get 'tops/top'
 get 'tops/about'
 root "tops#top"
