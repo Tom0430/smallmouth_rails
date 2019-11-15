@@ -1,5 +1,6 @@
 class GoalsController < ApplicationController
     def new
+        @user = current_user
         @goal = Goal.new
     end
 
@@ -7,30 +8,30 @@ class GoalsController < ApplicationController
         goal = Goal.new(goal_params)
         goal.user_id = current_user.id
         if goal.save
-            redirect_to goal_path(goal.id)
+            redirect_to user_goal_path(goal.user.id, goal.id)
         else
             render :new
         end
     end
 
     def index
-        @goals = Goal.all
+        @goals = Goal.all.includes(:user)
     end
 
     def show
+        @user = current_user
         @goal = Goal.find(params[:id])
         @comment = Comment.new
     end
 
     def achieved
-        goal = Goal.find(params[:goal_id])
+        goal = Goal.find(params[:id])
         goal.update(status:1)
-        @goals = current_user.goals.where(status: 1)
     end
+
     def failed
-        goal = Goal.find(params[:goal_id])
+        goal = Goal.find(params[:id])
         goal.update(status: 2)
-        @goals = current_user.goals.where(status: 2)
     end
 
     private

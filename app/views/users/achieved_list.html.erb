@@ -1,0 +1,17 @@
+<p>あなたが今までに達成した目標はこちら！！！</p>
+<p>30秒の目標 <%= @goals.where(limit_time: "limit30s" ).count %>個</p>
+<p>6時間の目標 <%= @goals.where(limit_time: "limit6h" ).count %>個</p>
+<p>24時間の目標 <%= @goals.where(limit_time: "limit1d" ).count %>個</p>
+<p>3日間の目標 <%= @goals.where(limit_time: "limit3d" ).count %>個</p>
+<p>1週間の目標 <%= @goals.where(limit_time: "limit1w" ).count %>個</p>
+<p>5秒間の目標 <%= @goals.where(limit_time: "limit5s" ).count %>個</p>
+<hr>
+
+<% @goals.each do |goal| %>
+    <%= link_to user_goal_path(goal.user.id, goal.id) do %>
+        <%= goal.title %>
+        <%= goal.detail %>
+        <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+    <% end %>
+    <hr>
+<% end %>

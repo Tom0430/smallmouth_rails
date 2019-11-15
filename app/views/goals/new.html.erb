@@ -1,4 +1,4 @@
-<%= form_for @goal do |f| %>
+<%= form_for [@user, @goal] do |f| %>
 
 <%= f.label :"新しい目標" %>
 <%= f.text_field :title %>

@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
         comment = current_user.comments.new(comment_params)
         comment.goal_id = goal.id
         comment.save
-        redirect_to goal_path(goal)
+        redirect_to user_goal_path(goal.user.id, goal.id)
     end
     private
     def comment_params

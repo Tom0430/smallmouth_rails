@@ -6,4 +6,9 @@
 <p>大口を叩くような無茶はせず、小さなことからコツコツとこなして行きませんか？</p>
 
 
-<%= link_to"新しい目標を立てる", new_goal_path %>
+<%= link_to"新しい目標を立てる", new_user_goal_path(current_user.id) %>
+<p>みんなの立てた<%= link_to"目標一覧へ", goals_path %></p>
+<hr>
+<%= link_to"新規ユーザー登録", new_user_registration_path %>
+<hr>
+<p>すでに会員の方は<%= link_to"ログイン", new_user_session_path %></p>
