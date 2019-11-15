@@ -2,12 +2,40 @@
 <%= @goal.title %>
 <%= @goal.detail %>
 
-<section><p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p></section>
+<p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
+<% if @goal.status == "trying" %>
+    <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user.id,@goal.id) %></div>
+    <div class="failed-text"><%= link_to "達成できなかった", failed_user_goal_path(@goal.user.id,@goal.id) %></div>
+<% end %>
 
-<div><%= link_to "達成できた", goal_achieved_path(@goal.id) %></div>
-<div class="failed-text"><%= link_to "達成できなかった", goal_failed_path(@goal.id) %></div>
+<%if @goal.user.id == current_user.id %>
+    <p>チャレンジの記録を残そう！!</p>
+    <%= form_for [@user, @goal, @progress] do |f| %>
+        <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
+        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+    <% end %>
+<% end %>
 
-<%= link_to"新", new_goal_path %>
+<hr>
+<% @goal.progresses.each do |progress| %>
+    <p><%= progress.goal.user.name %>さん</p>
+    <%= progress.body %>
+    <hr>
+<% end %>
+
+<% @goal.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.body %>
+    <hr>
+<% end %>
+
+<%= form_for [@user, @goal, @comment] do |f| %>
+    <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+    <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+<% end %>
+
+<%= link_to"新規目標", new_user_goal_path %>
+
 
 </body>
 

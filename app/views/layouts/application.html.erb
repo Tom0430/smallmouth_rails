@@ -24,7 +24,10 @@
         <ul>
           <li><%= link_to "マイページ", user_path(current_user.id), class: "glyphicon glyphicon-user", style: "font-size: 14px;" %></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"glyphicon glyphicon-log-out" %></li>
-          <li><%= current_user.name %></li>
+          <li><%= current_user.name %>さん</li>
+          <li><%= link_to"新規目標", new_user_goal_path(current_user.id) %></li>
+          <li><%= link_to"挑戦中の目標", trying_list_user_path(current_user.id) %></li>
+          <li><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></li>
         </ul>
       <% else %>
         <ul id="nav-mobile" class="left hide-on-med-and-down">

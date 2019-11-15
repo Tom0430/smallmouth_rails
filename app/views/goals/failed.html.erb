@@ -1,6 +1,3 @@
-<h2>チャレンジ失敗...</h2>
-<% @goals.each do |goal| %>
-<%= goal.title %>
-<%= goal.detail %>
-<% end %>
+<h2>チャレンジ失敗！！</h2>
 
+<%= link_to"達成できなかった目標一覧へ", failed_list_user_path(current_user.id) %>

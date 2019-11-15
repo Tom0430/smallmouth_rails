@@ -1,15 +1,10 @@
-<h2>goals</h2>
+<h2>現在取り組んでいるチャレンジはこちら！</h2>
 
 <% @goals.each do |goal| %>
     <%= link_to user_goal_path(goal.user.id, goal.id) do %>
         <%= goal.title %>
         <%= goal.detail %>
-        <span><%= goal.user.name %>さん</span>
         <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
     <% end %>
     <hr>
 <% end %>
-
-
-
-<%= link_to"新しい目標を立てる", new_user_goal_path(current_user.id) %>

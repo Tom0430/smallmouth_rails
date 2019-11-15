@@ -1,7 +1,4 @@
-<h2>達成おめでとうございます！</h2>
-<p>あなたが今までに達成した目標はこちら！！！</p>
+<h2>チャレンジ成功！</h2>
 
-<% @goals.each do |goal| %>
-<%= goal.title %>
-<%= goal.detail %>
-<% end %>
+
+<%= link_to"達成した目標一覧へ", achieved_list_user_path(current_user.id) %>
