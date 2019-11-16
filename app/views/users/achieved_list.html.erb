@@ -9,7 +9,7 @@
 
 <% @goals.each do |goal| %>
     <%= link_to user_goal_path(goal.user.id, goal.id) do %>
-        <%= goal.title %>
+        <%= "「" + goal.title + "」" %>
         <%= goal.detail %>
         <%= goal.limit_time_i18n %>
         <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>

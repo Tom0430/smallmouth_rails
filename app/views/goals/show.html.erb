@@ -1,6 +1,11 @@
 <body>
-<%= @goal.title %>
-<%= @goal.detail %>
+<%= "目標" %>
+<%= "「" + @goal.title + "」" %>
+<% if @goal.detail.present? %>
+    <hr>
+    <%= "目標詳細"%>
+    <%= @goal.detail %>
+<% end %>
 
 <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
 <% if @goal.status == "trying" %>
@@ -9,17 +14,25 @@
 <% end %>
 
 <%if @goal.user.id == current_user.id %>
-    <p>チャレンジの記録を残そう！!</p>
+    <p>チャレンジの記録を残そう!</p>
     <%= form_for [@user, @goal, @progress] do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
+        <%= f.label :"頑張った瞬間も投稿しちゃおう！"%>
+        <%= f.file_field :progress_image %>
         <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
     <% end %>
 <% end %>
 
 <hr>
+<% if @goal.progresses.present? %>
+    <p>チャレンジ達成までの道のり</p>
+<% end %>
 <% @goal.progresses.each do |progress| %>
-    <p><%= progress.goal.user.name %>さん</p>
+    <% if progress.progress_image? %>
+        <%= image_tag progress.progress_image.url %>
+    <% end %>
     <%= progress.body %>
+    <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
     <hr>
 <% end %>
 

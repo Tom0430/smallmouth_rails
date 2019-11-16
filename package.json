@@ -7,6 +7,7 @@
     "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.0.7",
     "jquery": "^3.4.1",
+    "jquery-bar-rating": "^1.2.2",
     "materialize-css": "^1.0.0-rc.2",
     "turbolinks": "^5.2.0"
   },

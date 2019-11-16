@@ -5,3 +5,16 @@
 <% if @user.image? %>
     <%= image_tag @user.image.url %>
 <% end %>
+<p>今までに達成した目標</p>
+<p>30秒の目標 <%= @user.goals.where(limit_time: "limit30s" ).count %>個</p>
+<p>6時間の目標 <%= @user.goals.where(limit_time: "limit6h" ).count %>個</p>
+<p>24時間の目標 <%= @user.goals.where(limit_time: "limit1d" ).count %>個</p>
+<p>3日間の目標 <%= @user.goals.where(limit_time: "limit3d" ).count %>個</p>
+<p>1週間の目標 <%= @user.goals.where(limit_time: "limit1w" ).count %>個</p>
+<p>5秒間の目標 <%= @user.goals.where(limit_time: "limit5s" ).count %>個</p>
+
+<%= link_to"ユーザー情報編集", edit_user_path %>
+<%= link_to"挑戦中の目標一覧", trying_list_user_path %>
+<%= link_to"達成した目標一覧", achieved_list_user_path %>
+<%= link_to"達成できなかった目標一覧", failed_list_user_path %>
+
