@@ -14,16 +14,23 @@
 <% end %>
 
 <%if @goal.user.id == current_user.id %>
+<<<<<<< HEAD
     <p>チャレンジの記録を残そう!</p>
     <%= form_for [@user, @goal, @progress] do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
         <%= f.label :"頑張った瞬間も投稿しちゃおう！"%>
         <%= f.file_field :progress_image %>
+=======
+    <p>チャレンジの記録を残そう！!</p>
+    <%= form_for [@user, @goal, @progress] do |f| %>
+        <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
+>>>>>>> 51c8b7caa4db576be8804b010aeed8a83be46a3c
         <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
     <% end %>
 <% end %>
 
 <hr>
+<<<<<<< HEAD
 <% if @goal.progresses.present? %>
     <p>チャレンジ達成までの道のり</p>
 <% end %>
@@ -33,6 +40,11 @@
     <% end %>
     <%= progress.body %>
     <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+=======
+<% @goal.progresses.each do |progress| %>
+    <p><%= progress.goal.user.name %>さん</p>
+    <%= progress.body %>
+>>>>>>> 51c8b7caa4db576be8804b010aeed8a83be46a3c
     <hr>
 <% end %>
 
