@@ -3,7 +3,9 @@
 <% @goals.each do |goal| %>
     <%= link_to user_goal_path(goal.user.id, goal.id) do %>
         <div>
-            <%= image_tag goal.user.image.url, size:'100x100' %>
+            <% if.goal.user.image %>
+                <%= image_tag goal.user.image.url, size:'100x100' %>
+            <% end %>
             <span><%= goal.user.name %>さん</span>
             <%= "目標" %>
             <%= "「" + goal.title + "」" %>

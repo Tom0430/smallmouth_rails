@@ -1,6 +1,48 @@
-<<<<<<< HEAD
-<h1>about</h1>
-=======
 <h1>about</h1>
 
->>>>>>> 51c8b7caa4db576be8804b010aeed8a83be46a3c
+<h1>jQuery稼働テスト(未稼働)</h1>
+<div>
+    <%= image_tag("unclicked.png", :id => "black", :size =>'30x30')%>
+    <span>==素晴らしいチャレンジにチーズをあげよう！ ==></span>
+    <%= image_tag("clicked.png", :id => "yellow", :size =>'30x30')%>
+  <div id = "cheese" >
+    <hr>
+    <%= image_tag("unclicked.png", :id => "black0", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black1", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black2", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black3", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black4", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black5", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black6", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black7", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black8", :class => "blacks", :size =>'60x60') %>
+    <%= image_tag("unclicked.png", :id => "black9", :class => "blacks", :size =>'60x60') %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    $("h1").text("jQuery稼働テスト(稼働中)");
+  });
+
+  var blsrc = $("#black")[0].currentSrc
+  var yesrc = $("#yellow")[0].currentSrc
+  let imagearray = [$('#black0'), $('#black1')]
+  // var black = document.getElementById(imagearray);
+
+  for( var i = 0; i < imagearray.length; i++){
+      // black.attr('src', yesrc);
+      console.log([$('#black0'), $('#black1')]);
+      console.log();
+      // debugger;
+      $(imagearray[i]).click(function(){
+        // imagearray[i].attr('src', yesrc);
+        console.log($(imagearray[i]));
+        console.log([i]);
+        return
+      });
+    };
+
+</script>
