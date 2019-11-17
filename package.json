@@ -9,7 +9,10 @@
     "jquery": "^3.4.1",
     "jquery-bar-rating": "^1.2.2",
     "materialize-css": "^1.0.0-rc.2",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.2",
+    "vue-template-compiler": "^2.6.10"
   },
   "version": "0.1.0",
   "devDependencies": {
