@@ -23,6 +23,10 @@
     <% end %>
 <% end %>
 
+<% if user_signed_in? && @goal.user.id != current_user.id %>
+    <%= javascript_pack_tag 'ratebox' %>
+<% end %>
+
 <hr>
 <% if @goal.progresses.present? %>
     <p>チャレンジ達成までの道のり</p>
