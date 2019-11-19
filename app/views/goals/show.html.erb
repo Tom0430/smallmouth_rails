@@ -1,21 +1,22 @@
 <body>
 <%= "目標" %>
 <%= "「" + @goal.title + "」" %>
+<%= @goal.user.name %>
 <% if @goal.detail.present? %>
     <hr>
     <%= "目標詳細"%>
     <%= @goal.detail %>
 <% end %>
 
-<p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
 <% if @goal.status == "trying" %>
+    <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
     <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user.id,@goal.id) %></div>
-    <div class="failed-text"><%= link_to "達成できなかった", failed_user_goal_path(@goal.user.id,@goal.id) %></div>
+    <div><%= link_to "達成できなかった", failed_user_goal_path(@goal.user.id,@goal.id) %></div>
 <% end %>
 
 <%if @goal.user.id == current_user.id %>
     <p>チャレンジの記録を残そう!</p>
-    <%= form_for [@user, @goal, @progress] do |f| %>
+    <%= form_for [@user, @goal, @comment],url: user_goal_progress_path(current_user.id,@goal.id) do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
         <%= f.label :"頑張った瞬間も投稿しちゃおう！"%>
         <%= f.file_field :progress_image %>
@@ -23,17 +24,49 @@
     <% end %>
 <% end %>
 
-<hr>
+<% if user_signed_in? && current_user.id != @goal.user.id %>
+    <%= image_tag("unclicked.png", :id => "black", :size =>'30x30')%>
+        <span>== 素晴らしいチャレンジにチーズをあげよう！ ==></span>
+    <%= image_tag("clicked.png", :id => "yellow", :size =>'30x30')%>
+
+    <% if current_user && @goal.rated_by?(current_user) %>
+        <p> チーズあげてます </p>
+    <% end %>
+
+
+    <!-- form_withでかこむ -->
+    <%= form_with(model: [current_user,@goal,@rate], remote: true ) do |f| %>
+        <span class = "ratebox" >
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "0" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "1" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "2" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "3" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "4" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "5" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "6" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "7" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "8" }, :class => "blacks", :size =>'60x60') %>
+            <%= image_tag("unclicked.png", :data => { :cheese_index => "9" }, :class => "blacks", :size =>'60x60') %>
+        </span>
+        <!-- hidden_fieldとかで評価を持つテーブルのカラム用意。jsで値埋め込むのでclassとかidとかつける-->
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.hidden_field :goal_id, :value => @goal.id %>
+        <%= f.hidden_field :quantity, :value => -1, :id => "ratequantity" %>
+        <%= f.submit "送信", id:"ratesubmit", :style => "display: none;" %>
+    <% end %>
+    <hr>
+<% end %>
+
 <% if @goal.progresses.present? %>
     <p>チャレンジ達成までの道のり</p>
-<% end %>
-<% @goal.progresses.each do |progress| %>
-    <% if progress.progress_image? %>
-        <%= image_tag progress.progress_image.url %>
+    <% @goal.progresses.each do |progress| %>
+        <% if progress.progress_image? %>
+            <%= image_tag progress.progress_image.url %>
+        <% end %>
+        <%= progress.body %>
+        <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        <hr>
     <% end %>
-    <%= progress.body %>
-    <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-    <hr>
 <% end %>
 
 <% @goal.comments.each do |comment| %>
@@ -42,7 +75,7 @@
     <hr>
 <% end %>
 
-<%= form_for [@user, @goal, @comment] do |f| %>
+<%= form_for [current_user, @goal, @comment],url:user_goal_comment_path(current_user.id,@goal.id) do |f| %>
     <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
     <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
 <% end %>
@@ -58,24 +91,18 @@
     var limit = new Date("<%= @goal.remaining_time %>");
     var countdown = function(limit_due) {
         var now = new Date();
-        // modelの値(不変) - 今の時刻(どんどん増えてく。ブラウザの更新によらない)
         var rest = limit_due.getTime() - now.getTime();
         var sec = Math.floor(rest / 1000 % 60);
         var min = Math.floor(rest / 1000 / 60) % 60;
         var hours = Math.floor(rest / 1000 / 60 / 60) % 24;
         var days = Math.floor(rest/ 1000 / 60 / 60 / 24 )
         var count_hash = {days: days, hours: hours, min: min, sec: sec}
-
         return count_hash;
     }
-
-    //var failed_text = document.getElementsById("aaa");
-    var failed_text = document.getElementsByClassName("failed-text");
     var recale = function() {
         var counter = countdown(limit);
         if(counter["days"] <= 0 && counter["hours"] <= 0 && counter["min"] <= 0 && counter["sec"] <= 0){
             document.getElementById('timer-text').textContent = "チャレンジ終了！達成できましたか？";
-            failed_text[0].style.display = "block";
             return
         }
         else{
@@ -88,7 +115,31 @@
     var one_second_recale_refresh = function() {
         setTimeout(recale, 1000)
     }
-
     recale();
+</script>
 
+<script type="text/javascript">
+    //チーズの画像で評価機能
+
+    $(".blacks").click(function(){
+        const blackSrc = $("#black")[0].currentSrc
+        const yellowSrc = $("#yellow")[0].currentSrc
+        let currentYellow = -1
+
+        const index = $(this).data("cheeseIndex")
+        if(index > currentYellow ){
+            for(let i = 0; i <= index; i++){
+                $(`.ratebox img[data-cheese-index=${i}]`).attr('src', yellowSrc);
+            }
+        }else{
+            for(let i = index + 1; i <= 9 ; i++){
+                $(`.ratebox img[data-cheese-index=${i}]`).attr('src', blackSrc);
+            }
+        };
+        currentYellow = index
+        // hidden_fieldのclassを読み込んで、そこにindexを代入
+        $("#ratequantity")[0].value = currentYellow
+        // form_withのsubmit(についてるclassとかを取得)ボタンをおす記述。
+        document.getElementById("ratesubmit").click();
+    });
 </script>

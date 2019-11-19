@@ -1,42 +1,17 @@
 <h2>goals</h2>
-<%= image_tag("unclicked.png", :id => "black", :size =>'30x30')%>
-<span>==素晴らしいチャレンジにチーズをあげよう！ ==></span>
-<%= image_tag("clicked.png", :id => "yellow", :size =>'30x30')%>
-
-<% @goals.each do |goal| %>
-    <div>
-        <%= link_to user_goal_path(goal.user.id, goal.id) do %>
-            <% if goal.user.image.present? %>
-                <%= image_tag goal.user.image.url, size:'100x100' %>
+<div>
+    <% @goals.each do |goal| %>
+        <div>
+            <%= link_to user_goal_path(goal.user.id, goal.id) do %>
+                <% if goal.user.image.present? %>
+                    <%= image_tag goal.user.image.url, size:'100x100' %>
+                <% end %>
+                <span><%= goal.user.name %>さん</span>
+                <%= "目標" %>
+                <%= "「" + goal.title + "」" %>
+                <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
             <% end %>
-            <span><%= goal.user.name %>さん</span>
-            <%= "目標" %>
-            <%= "「" + goal.title + "」" %>
-            <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-        <% end %>
-        <%= render 'rates/rate_cheese' %>
-    </div>
-<% end %>
+        </div>
+    <% end %>
+<div>
 <%= link_to"新しい目標を立てる", new_user_goal_path(current_user.id) %>
-
-
-<script type="text/javascript">
-
-    const blackSrc = $("#black")[0].currentSrc
-    const yellowSrc = $("#yellow")[0].currentSrc
-    let nowYellow = -1
-
-    $(".blacks").click(function(){
-        const index = $(this).data("cheeseIndex")
-        if(index > nowYellow ){
-        for(let i = 0; i <= index; i++){
-            $(`.ratebox img[data-cheese-index=${i}]`).attr('src', yellowSrc);
-        }
-        }else{
-        for(let i = index + 1; i <= 9 ; i++){
-            $(`.ratebox img[data-cheese-index=${i}]`).attr('src', blackSrc);
-        }
-        };
-        nowYellow = index
-    });
-</script>
