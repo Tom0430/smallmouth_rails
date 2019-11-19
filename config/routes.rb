@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  
- resources :users do
+
+resources :users do
   get :trying_list, on: :member
   get :achieved_list, on: :member
   get :failed_list, on: :member
@@ -10,9 +10,9 @@ Rails.application.routes.draw do
     # get '/failed' => 'goals#failed', as: 'failed'
     get :achieved, on: :member
     get :failed, on: :member
-    resource :comments, only:[:create, :destroy]
-    resource :progresses, only:[:create, :destroy]
-    resource :rates, only:[:create, :destroy]
+    resource :comment, only:[:create, :destroy]
+    resource :progress, only:[:create, :destroy]
+    resource :rate, only:[:create, :update]
   end
 end
 

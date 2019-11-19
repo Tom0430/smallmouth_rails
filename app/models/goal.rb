@@ -28,4 +28,8 @@ class Goal < ApplicationRecord
         end
         return remaining_time
     end
+
+    def rated_by?(current_user)
+        rates.where(user_id: current_user.id).exists?
+    end
 end
