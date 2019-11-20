@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(version: 2019_11_07_091614) do
 
   create_table "comments", force: :cascade do |t|
-    t.string "user_id"
-    t.string "goal_id"
-    t.string "body"
+    t.string "user_id", null: false
+    t.string "goal_id", null: false
+    t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -31,17 +31,17 @@ ActiveRecord::Schema.define(version: 2019_11_07_091614) do
   end
 
   create_table "progresses", force: :cascade do |t|
-    t.string "goal_id"
-    t.string "body"
+    t.string "goal_id", null: false
+    t.string "body", null: false
     t.string "progress_image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "rates", force: :cascade do |t|
-    t.string "user_id"
-    t.string "goal_id"
-    t.string "quantity"
+    t.string "user_id", null: false
+    t.string "goal_id", null: false
+    t.string "quantity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2019_11_07_091614) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "name"
+    t.string "name", null: false
     t.text "profile_text"
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
