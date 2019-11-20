@@ -8,8 +8,9 @@
     <%= @goal.detail %>
 <% end %>
 <hr>
-<%= "チーズ合計獲得数" + @goal.rates.sum(:quantity) + "個" %>
+<%= "チーズ合計獲得数" + @goal.rates.sum(:quantity).to_s + "個" %>
 <hr>
+
 
 <% if @goal.status == "trying" && @goal.user.id == current_user.id %>
     <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
@@ -21,10 +22,12 @@
 <hr>
 <%if @goal.user.id == current_user.id %>
     <p>チャレンジの記録を残そう!</p>
-    <%= form_for [@user, @goal, @comment],url: user_goal_progress_path(current_user.id,@goal.id) do |f| %>
+    <%= form_for [@user, @goal, @progress],url: user_goal_progress_path(current_user.id,@goal.id) do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
         <%= f.label :"頑張った瞬間も投稿しちゃおう！"%>
         <%= f.file_field :progress_image %>
+        <%= f.label :"ビデオで投稿しちゃおう！"%>
+        <%= f.file_field :progress_video %>
         <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
     <% end %>
 <% end %>
@@ -35,7 +38,7 @@
     <%= image_tag("clicked.png", :id => "yellow", :size =>'30x30')%><br>
 
     <% if @goal.rated_by?(current_user) %>
-        <%= "あなたはこのチャレンジに" + @rate.quantity + "個のチーズをあげています。" %><br>
+        <%= "あなたはこのチャレンジに" + @rate.quantity.to_s + "個のチーズをあげています。" %><br>
         <%= "個数を変更するならもう一度チーズの個数を選択してください。" %>
     <% end %>
 
@@ -67,6 +70,8 @@
     <% @goal.progresses.each do |progress| %>
         <% if progress.progress_image? %>
             <%= image_tag progress.progress_image.url %>
+        <% elsif progress.progress_video? %>
+            <%= video_tag progress.progress_video.url %>
         <% end %>
         <%= progress.body %>
         <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>

@@ -43,12 +43,6 @@ class GoalsController < ApplicationController
         goal = Goal.find(params[:id])
         goal.update(status: 2)
     end
-    def ranking
-        @goal_id_and_quantities_arrays = Rate.group(:goal_id).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
-        @user_id_and_quantities_arrays = Rate.joins(goal: :user).group("goals.user_id").sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
-        # @weekly_goal_id_and_quantities_arrays = Rate.joins(:goal).where(created_at: 1.weeks.ago.beginning_of_day..Time.zone.now.end_of_day).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
-        # @weekly_user_rate_id_and_quantities_arrays = Rate.where(created_at: 1.weeks.ago.beginning_of_day..Time.zone.now.end_of_day).group(:user_id).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
-    end
 
     private
     def goal_params

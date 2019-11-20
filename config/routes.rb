@@ -15,7 +15,7 @@ resources :users do
 end
 
 get '/goals', to: 'goals#index', as: 'goals'
-get '/ranking', to: 'goals#ranking', as: 'ranking'
+get '/ranking', to: 'rates#ranking', as: 'ranking'
 get 'tops/top'
 get 'tops/about'
 root "tops#top"

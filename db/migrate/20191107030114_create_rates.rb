@@ -3,7 +3,7 @@ class CreateRates < ActiveRecord::Migration[6.0]
     create_table :rates do |t|
       t.string :user_id, null: false
       t.string :goal_id, null: false
-      t.string :quantity, null: false
+      t.integer :quantity, null: false
 
       t.timestamps
     end

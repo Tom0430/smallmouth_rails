@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_11_07_091614) do
     t.string "goal_id", null: false
     t.string "body", null: false
     t.string "progress_image"
+    t.string "progress_video"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -41,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_11_07_091614) do
   create_table "rates", force: :cascade do |t|
     t.string "user_id", null: false
     t.string "goal_id", null: false
-    t.string "quantity", null: false
+    t.integer "quantity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
