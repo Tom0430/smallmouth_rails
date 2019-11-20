@@ -7,9 +7,9 @@
                     <%= image_tag goal.user.image.url, size:'100x100' %>
                 <% end %>
                 <span><%= goal.user.name %>さん</span>
-                <%= "目標" %>
                 <%= "「" + goal.title + "」" %>
-                <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+                <%= "目標設定日時" + goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+                <%= goal.limit_time_i18n %>
             <% end %>
         </div>
     <% end %>

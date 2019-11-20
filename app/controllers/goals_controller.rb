@@ -15,7 +15,15 @@ class GoalsController < ApplicationController
     end
 
     def index
-        @goals = Goal.all.includes(:user)
+        if params[:search].blank?
+            @goals = Goal.all.includes(:user).order(id: "DESC")
+        else
+            title = Goal.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+            detail = Goal.where("detail LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+            user = Goal.joins(:user).where("name LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+            merged_search_result = ( title | detail )
+            @goal = ( merged_search_resultsearch | user )
+        end
     end
 
     def show

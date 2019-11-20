@@ -1,10 +1,11 @@
 class CreateProgresses < ActiveRecord::Migration[6.0]
   def change
     create_table :progresses do |t|
-      t.string :user_id
-      t.string :goal_id
-      t.string :body
+      t.string :user_id, null: false
+      t.string :goal_id, null: false
+      t.string :body, null: false
       t.string :progress_image
+      t.string :progress_video
 
       t.timestamps
     end
