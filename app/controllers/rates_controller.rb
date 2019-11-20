@@ -4,7 +4,6 @@ class RatesController < ApplicationController
         rate = goal.rates.new(rate_params)
         rate.save
         redirect_to user_goal_path(goal.user.id, goal.id)
-
     end
 
     def update
@@ -17,6 +16,6 @@ class RatesController < ApplicationController
 
     private
     def rate_params
-      params.require(:rate).permit(:user_id, :goal_id, :quantity)
+        params.require(:rate).permit(:user_id, :goal_id, :quantity)
     end
 end

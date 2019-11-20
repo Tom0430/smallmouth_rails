@@ -21,8 +21,8 @@ class GoalsController < ApplicationController
             title = Goal.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
             detail = Goal.where("detail LIKE ?", "%#{params[:search]}%").order(id: "DESC")
             user = Goal.joins(:user).where("name LIKE ?", "%#{params[:search]}%").order(id: "DESC")
-            merged_result = ( title | detail )
-            @goal = ( search | user )
+            merged_search_result = ( title | detail )
+            @goal = ( merged_search_resultsearch | user )
         end
     end
 
@@ -34,9 +34,6 @@ class GoalsController < ApplicationController
         @rate = Rate.find_or_initialize_by(user_id: current_user.id, goal_id: @goal.id)
     end
 
-    @rates = Hash[Rate.group(:goal_id).sum(:quantity)]
-    @sort_posts = Hash[ Post.group(:stadium_id).average(:gouremet_rate).sort_by{ |_, v| -v } ]
-
     def achieved
         goal = Goal.find(params[:id])
         goal.update(status:1)
@@ -46,9 +43,11 @@ class GoalsController < ApplicationController
         goal = Goal.find(params[:id])
         goal.update(status: 2)
     end
-
     def ranking
-        @rank = Rate.group(:goal_id).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
+        @goal_id_and_quantities_arrays = Rate.group(:goal_id).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
+        @user_id_and_quantities_arrays = Rate.joins(goal: :user).group("goals.user_id").sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
+        # @weekly_goal_id_and_quantities_arrays = Rate.joins(:goal).where(created_at: 1.weeks.ago.beginning_of_day..Time.zone.now.end_of_day).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
+        # @weekly_user_rate_id_and_quantities_arrays = Rate.where(created_at: 1.weeks.ago.beginning_of_day..Time.zone.now.end_of_day).group(:user_id).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
     end
 
     private

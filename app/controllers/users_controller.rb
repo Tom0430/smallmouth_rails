@@ -15,18 +15,18 @@ class UsersController < ApplicationController
         end
     end
     def achieved_list
-        @goals = current_user.goals.where(status: 1)
+        @goals = current_user.goals.where(status: 1).order(id: "DESC")
     end
     def failed_list
-        @goals = current_user.goals.where(status: 2)
+        @goals = current_user.goals.where(status: 2).order(id: "DESC")
     end
     def trying_list
-        @goals = current_user.goals.where(status: 0)
+        @goals = current_user.goals.where(status: 0).order(id: "DESC")
     end
 
 
     private
     def user_params
-      params.require(:user).permit(:name, :profile_text, :image)
+        params.require(:user).permit(:name, :profile_text, :image)
     end
 end

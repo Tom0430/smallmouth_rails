@@ -1,7 +1,7 @@
 <body>
 <%= "目標" %>
 <%= "「" + @goal.title + "」" %>
-<%= @goal.user.name %>
+<%= @goal.user.name + "さん" %>
 <% if @goal.detail.present? %>
     <hr>
     <%= "目標詳細"%>
@@ -11,8 +11,7 @@
 <%= "チーズ合計獲得数" + @goal.rates.sum(:quantity) + "個" %>
 <hr>
 
-
-<% if @goal.status == "trying" && @goal.user_id == current_user.id %>
+<% if @goal.status == "trying" && @goal.user.id == current_user.id %>
     <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
     <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user.id,@goal.id) %></div>
     <div><%= link_to "達成できなかった", failed_user_goal_path(@goal.user.id,@goal.id) %></div>
