@@ -1,0 +1,58 @@
+$(function(){
+    $("#black1").click(function(){
+    $("#black1").attr('src', yesrc)
+      // $("#black").hide();
+      // $("#yellow").show();
+      // $("#black").fadeTo("show", 0.2);
+    });
+    $("#black2").click(function(){
+    $("#black1").attr('src', yesrc)
+    $("#black2").attr('src', yesrc)
+    });
+  });    
+console.log(document.getElementById(black[i]))
+
+
+
+for(var i = 0; i < imagearray.length ; i++){
+  $(imagearray[i]).click(function(){
+    // imagearray[i].attr('src', yesrc)
+    console.log($())
+  })
+}
+
+
+var imagearray = ["#black0", "#black1", "#black2", "#black3", "#black4", "#black5", "#black6", "#black7", "#black8", "#black9"]
+for(var i = 0; i < imagearray.length ; i++){
+  var aaa = document.getElementById(imagearray[i]);
+    aaa.attr('src', yesrc);
+    console.log(aaa);
+  });
+};
+
+// var imagearray = ["#black0", "#black1", "#black2", "#black3", "#black4", "#black5", "#black6", "#black7", "#black8", "#black9"]
+
+// blacks[i].attr('src', yesrc);
+
+
+ $(document).ready(function() {
+    $("p").text("jQuery稼働テスト(稼働中)");
+  });
+
+  var blsrc = $("#black")[0].currentSrc
+  var yesrc = $("#yellow")[0].currentSrc
+
+var blacks = document.getElementByClass("blacks");
+for(var i = 0; i < imagearray.length ; i++){
+  $(imagearray[i]).click(function(){
+    
+    // imagearray[i].attr('src', yesrc);
+    console.log($(imagearray[i]))
+  });
+};
+
+
+
+  $.each(imagearray, function(index, val) {
+
+});

@@ -1,60 +1,61 @@
 <body>
 <%= "目標" %>
 <%= "「" + @goal.title + "」" %>
+<%= @goal.user.name + "さん" %>
 <% if @goal.detail.present? %>
     <hr>
     <%= "目標詳細"%>
     <%= @goal.detail %>
 <% end %>
+<hr>
+<%= "チーズ合計獲得数" + @goal.rates.sum(:quantity).to_s + "個" %>
+<hr>
 
-<p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
-<% if @goal.status == "trying" %>
-    <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user.id,@goal.id) %></div>
-    <div class="failed-text"><%= link_to "達成できなかった", failed_user_goal_path(@goal.user.id,@goal.id) %></div>
+
+<% if @goal.status == "trying" && @goal.user.id == current_user.id %>
+    <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
+    <%= link_to "達成できた", achieved_user_goal_path(@goal.user.id,@goal.id) %>
+    <%= link_to "達成できなかった", failed_user_goal_path(@goal.user.id,@goal.id) %>
+<% else %>
+    <%= "このチャレンジは終了しました" %>
 <% end %>
-
+<hr>
 <%if @goal.user.id == current_user.id %>
-<<<<<<< HEAD
     <p>チャレンジの記録を残そう!</p>
-    <%= form_for [@user, @goal, @progress] do |f| %>
+    <%= form_for [@user, @goal, @progress],url: user_goal_progress_path(current_user.id,@goal.id) do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
         <%= f.label :"頑張った瞬間も投稿しちゃおう！"%>
         <%= f.file_field :progress_image %>
-=======
-    <p>チャレンジの記録を残そう！!</p>
-    <%= form_for [@user, @goal, @progress] do |f| %>
-        <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
->>>>>>> 51c8b7caa4db576be8804b010aeed8a83be46a3c
+        <%= f.label :"ビデオで投稿しちゃおう！"%>
+        <%= f.file_field :progress_video %>
         <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
     <% end %>
 <% end %>
 
 <hr>
-<<<<<<< HEAD
 <% if @goal.progresses.present? %>
     <p>チャレンジ達成までの道のり</p>
-<% end %>
-<% @goal.progresses.each do |progress| %>
-    <% if progress.progress_image? %>
-        <%= image_tag progress.progress_image.url %>
+    <% @goal.progresses.each do |progress| %>
+        <% if progress.progress_image? %>
+            <%= image_tag progress.progress_image.url %>
+        <% end %>
+        <%  if progress.progress_video? %>
+            <%= video_tag progress.progress_video.url %>
+        <% end %>
+        <%= progress.body %>
+        <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        <hr>
     <% end %>
-    <%= progress.body %>
-    <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-=======
-<% @goal.progresses.each do |progress| %>
-    <p><%= progress.goal.user.name %>さん</p>
-    <%= progress.body %>
->>>>>>> 51c8b7caa4db576be8804b010aeed8a83be46a3c
-    <hr>
 <% end %>
 
 <% @goal.comments.each do |comment| %>
     <%= comment.user.name %>
     <%= comment.body %>
+    <%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
     <hr>
 <% end %>
 
-<%= form_for [@user, @goal, @comment] do |f| %>
+<%= form_for [current_user, @goal, @comment],url:user_goal_comment_path(current_user.id,@goal.id) do |f| %>
     <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
     <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
 <% end %>
@@ -70,24 +71,18 @@
     var limit = new Date("<%= @goal.remaining_time %>");
     var countdown = function(limit_due) {
         var now = new Date();
-        // modelの値(不変) - 今の時刻(どんどん増えてく。ブラウザの更新によらない)
         var rest = limit_due.getTime() - now.getTime();
         var sec = Math.floor(rest / 1000 % 60);
         var min = Math.floor(rest / 1000 / 60) % 60;
         var hours = Math.floor(rest / 1000 / 60 / 60) % 24;
         var days = Math.floor(rest/ 1000 / 60 / 60 / 24 )
         var count_hash = {days: days, hours: hours, min: min, sec: sec}
-
         return count_hash;
     }
-
-    //var failed_text = document.getElementsById("aaa");
-    var failed_text = document.getElementsByClassName("failed-text");
     var recale = function() {
         var counter = countdown(limit);
         if(counter["days"] <= 0 && counter["hours"] <= 0 && counter["min"] <= 0 && counter["sec"] <= 0){
             document.getElementById('timer-text').textContent = "チャレンジ終了！達成できましたか？";
-            failed_text[0].style.display = "block";
             return
         }
         else{
@@ -100,7 +95,31 @@
     var one_second_recale_refresh = function() {
         setTimeout(recale, 1000)
     }
-
     recale();
+</script>
 
+<script type="text/javascript">
+    //チーズの画像で評価機能
+    $(".blacks").click(function(){
+        const blackSrc = $("#black")[0].currentSrc
+        const yellowSrc = $("#yellow")[0].currentSrc
+        //光っている最後のチーズの番号をcurretYellowに代入
+        let currentYellow = -1
+
+        const index = $(this).data("cheeseIndex")
+        if(index > currentYellow ){
+            for(let i = 1; i <= index; i++){
+                $(`.ratebox img[data-cheese-index=${i}]`).attr('src', yellowSrc);
+            }
+        }else{
+            for(let i = index + 1; i <= 10 ; i++){
+                $(`.ratebox img[data-cheese-index=${i}]`).attr('src', blackSrc);
+            }
+        };
+        currentYellow = index
+        // hidden_fieldのclassを読み込んで、そこにcurrentYellowを代入
+        $("#ratequantity")[0].value = currentYellow
+        // form_withのsubmit(についてるclassとかを取得)ボタンをおす記述。
+        document.getElementById("ratesubmit").click();
+    });
 </script>

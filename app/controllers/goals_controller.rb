@@ -31,6 +31,7 @@ class GoalsController < ApplicationController
         @goal = Goal.find(params[:id])
         @comment = Comment.new
         @progress = Progress.new
+        @rate = Rate.find_or_initialize_by(user_id: current_user.id, goal_id: @goal.id)
     end
 
     def achieved

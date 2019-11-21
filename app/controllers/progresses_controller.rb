@@ -9,6 +9,6 @@ class ProgressesController < ApplicationController
     end
     private
     def progress_params
-      params.require(:progress).permit(:user_id,:goal_id,:body, :progress_image)
+      params.require(:progress).permit(:user_id,:goal_id,:body, :progress_image, :progress_video)
     end
 end
