@@ -33,6 +33,12 @@
           <li><%= link_to "ログイン", new_user_session_path %></li>
         </ul>
       <% end %>
+      <div class="search-box">
+        <%= form_tag(goals_path,method: :get) do %>
+            <%= text_field_tag :search, "", placeholder: "みんなの目標を検索" %>
+            <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil %>
+        <% end %>
+      </div>
     </div>
   </nav>
 
