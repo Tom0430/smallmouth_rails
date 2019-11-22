@@ -1,17 +1,17 @@
 <body>
     <hr>
-    <%= "目標" %>
+    <%= "チャレンジ" %>
     <%= "「" + @goal.title + "」" %>
-    <%= @goal.user.name + "さん" %>
-    <% if @goal.detail.present? %>
-        <hr>
-        <%= "目標詳細"%>
-        <%= @goal.detail %>
-    <% end %>
+    <hr>
+    <%= "チャレンジ詳細"%>
+    <%= @goal.detail %>
     <hr>
     <%= "チーズ合計獲得数" + @goal.rates.sum(:quantity).to_s + "個" %>
     <hr>
-    <%# カウントダウンタイマー表示　時間経過,結果を選択後表示の切り替え %>
+    <%= "投稿者名" + @goal.user.name + "さん" %>
+    <hr>
+
+    <%# カウントダウンタイマー表示 時間経過,結果を選択後表示の切り替え %>
     <% if @goal.status == "trying" && @goal.user.id == current_user.id %>
         <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
         <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user.id,@goal.id) %></div>
@@ -47,20 +47,20 @@
             <%= f.submit "送信", id:"ratesubmit", :style => "display: none;" %>
         <% end %>
     <% end %>
-    <%# チーズの画像で評価機能 ここまで　%>
+    <%# チーズの画像で評価機能 ここまで %>
     <hr>
-    <%# チャレンジの過程投稿機能　%>
+    <%# チャレンジの過程投稿機能%>
     <%if @goal.user.id == current_user.id %>
         <p>チャレンジの記録を残そう!</p>
         <%= form_for [@user, @goal, @progress],url: user_goal_progress_path(current_user.id,@goal.id) do |f| %>
             <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
             <%= f.label :"頑張った瞬間の写真を投稿しちゃおう！"%>
             <%= f.file_field :progress_image %>
-            <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+            <%= f.submit "送信する", class: "challege-submit btn-lg btn-base-1 mt-20 pull-right" %>
         <% end %>
     <% end %>
     <hr>
-    <%# 過程表示　%>
+    <%# 過程表示 %>
     <% if @goal.progresses.present? %>
         <p>チャレンジ達成までの道のり</p>
         <% @goal.progresses.each do |progress| %>
@@ -72,7 +72,7 @@
         <% end %>
         <hr>
     <% end %>
-    <%# コメント表示　%>
+    <%# コメント表示 %>
     <% @goal.comments.each do |comment| %>
         <%= comment.user.name + "さん" %>
         <%= comment.body %>
@@ -82,7 +82,7 @@
     <%# コメント投稿 %>
     <%= form_for [current_user, @goal, @comment],url:user_goal_comment_path(current_user.id,@goal.id) do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+        <%= f.submit "送信する", class: "comment-submit btn-lg btn-base-1 mt-20 pull-right" %>
     <% end %>
 </body>
 
