@@ -11,47 +11,81 @@
   </head>
 
   <body>
+    <!--　ヘッダー　-->
+    <section class="section2">
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+        <!-- Navbar brand -->
+        <div class="navbar-brand" href="#">
+          <span><%= link_to "SmallMouth", root_path %></span>
+          <span><%= image_tag("mouse.png", :id => "mouse_img", :size =>'30x30')%></span>
+        </div>
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+          <form class="form-inline">
+            <div class="md-form">
+              <%= form_tag(goals_path,method: :get) do %>
+                  <%= text_field_tag :search, "", placeholder: "みんなのチャレンジを検索" %>
+                  <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil, :id => 'headersubmit' %>
+              <% end %>
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+      </nav>
+      <!--/.Navbar-->
+    </section>
+    <!--　ヘッダー　-->
 
-    <nav>
-    <div class="nav-wrapper #fbc02d yellow darken-2">
-      <%= link_to "SmallMouth", root_path %>
-      <% if user_signed_in? %>
-        <ul>
-          <li><%= link_to "マイページ", user_path(current_user.id), class: "glyphicon glyphicon-user", style: "font-size: 14px;" %></li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"glyphicon glyphicon-log-out" %></li>
-          <li><%= current_user.name %>さん</li>
-          <% if current_user.goals.where(status: 0).present? %>
-            <%= "「" + current_user.goals.where(status: 0).first.title + "」" %>
-            <% if current_user.goals.where(status: 0).count >= 2 %>
-              <%= " ＋その他" %>
+    <div>
+      <div class="row">
+        <div class="col-md-2">
+          <!--　サイドバー -->
+          <div id="sidebar">
+            <% if user_signed_in? %>
+              <div>
+                <% if current_user.image.present? %>
+                  <%= image_tag current_user.image.url, size:'100x100', class:"user_image" %>
+                <% else %>
+                  <%= image_tag "no_image.jpeg", :size => '100x100', class:"user_image" %>
+                <% end %>
+              </div>
+              <div class="banner"><%= current_user.name %>さん</div>
+              <div class="banner"><%= link_to "マイページ", user_path(current_user.id) %></div>
+              <div class="banner">
+                <% if current_user.goals.where(status: 0).present? %>
+                  <%= link_to(user_goal_path(current_user.id,current_user.goals.where(status: 0).first.id)) do %>
+                    <%= "「" + current_user.goals.where(status: 0).first.title + "」" %>
+                  <% end %>
+                  <% if current_user.goals.where(status: 0).count >= 2 %>
+                    <%= " ＋その他" %>
+                  <% end %>
+                  <%= "チャレンジ中！" %>
+                <% end %>
+              </div>
+              <div class="banner"><%= link_to"新しいチャレンジ", new_user_goal_path(current_user.id) %></div>
+              <div class="banner"><%= link_to"継続中のチャレンジ", trying_list_user_path(current_user.id) %></div>
+              <div class="banner"><%= link_to"ランキング", ranking_path %></div>
+              <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
+              <div class="banner"><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></div>
+              <div class="banner"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+            <% else %>
+              <div class="banner"><%= link_to "新規会員登録", new_user_registration_path %></div>
+              <div class="banner"><%= link_to "ログイン", new_user_session_path %></div>
+              <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
             <% end %>
-            <%= "チャレンジ中！" %>
-          <% end %>
-
-          <li><%= link_to"新規目標", new_user_goal_path(current_user.id) %></li>
-          <li><%= link_to"挑戦中の目標", trying_list_user_path(current_user.id) %></li>
-          <li><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></li>
-        </ul>
-      <% else %>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><%= link_to "新規会員登録", new_user_registration_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-        </ul>
-      <% end %>
-      <div class="search-box">
-        <%= form_tag(goals_path,method: :get) do %>
-            <%= text_field_tag :search, "", placeholder: "みんなの目標を検索" %>
-            <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil %>
-        <% end %>
+          </div>
+          <!--　サイドバー -->
+        </div>
+        <div class="col-md-10">
+          <%= yield %>
+        </div>
       </div>
     </div>
-  </nav>
-
-    <%= yield %>
-
-  <footer class="#fbc02d yellow darken-2">
-    <p class="footer-text">フッター</p>
-  </footer>
+    <!--　フッター -->
+    <footer class="#fbc02d yellow darken-2">
+      <p class="footer-text">フッター</p>
+    </footer>
+    <!--　フッター -->
   </body>
 </html>
-

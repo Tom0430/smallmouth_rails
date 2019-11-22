@@ -5,7 +5,6 @@ class CreateProgresses < ActiveRecord::Migration[6.0]
       t.string :goal_id, null: false
       t.string :body, null: false
       t.string :progress_image
-      t.string :progress_video
 
       t.timestamps
     end

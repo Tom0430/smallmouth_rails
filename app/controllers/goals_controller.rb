@@ -22,12 +22,11 @@ class GoalsController < ApplicationController
             detail = Goal.where("detail LIKE ?", "%#{params[:search]}%").order(id: "DESC")
             user = Goal.joins(:user).where("name LIKE ?", "%#{params[:search]}%").order(id: "DESC")
             merged_result = ( title | detail )
-            @goal = ( merged_result | user )
+            @goals = ( merged_result | user )
         end
     end
 
     def show
-        @user = current_user
         @goal = Goal.find(params[:id])
         @comment = Comment.new
         @progress = Progress.new

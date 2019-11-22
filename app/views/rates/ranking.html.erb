@@ -3,11 +3,18 @@
     <%= user_rank[:rank].to_s + "位" %>
     <%= "総獲得チーズ" + user_rank[:u_quantity].to_s + "個"%>
     <%= user_rank[:user_name] + "さん" %>
-    <%= link_to"プロフィールをみる", user_path([:user_id]) %>
+    <%= link_to"プロフィールをみる", user_path(user_rank[:user_id]) %>
     <hr>
 <% end %>
 
-
+<h2>週間チャレンジャーランキング</h2>
+<% @weekly_users_rank.each do |user_rank| %>
+    <%= user_rank[:rank].to_s + "位" %>
+    <%= "週間獲得チーズ" + user_rank[:u_quantity].to_s + "個"%>
+    <%= user_rank[:user_name] + "さん" %>
+    <%= link_to"プロフィールをみる", user_path(user_rank[:user_id]) %>
+    <hr>
+<% end %>
 
 <h2>歴代ベストチャレンジランキング</h2>
 <% @goals_rank.each do |goal_rank| %>
@@ -17,7 +24,19 @@
     <%= goal_rank[:goal_user_id].name + "さん" %>
     <%= goal_rank[:goal_setting_date] %>
     <%= goal_rank[:limit_time] %>
-    <%= link_to"詳細へ", user_goal_path([:goal_user_id], [:goal_id]) %>
+    <%= link_to"詳細へ", user_goal_path(goal_rank[:goal_user_id], goal_rank[:goal_id]) %>
+    <hr>
+<% end %>
+
+<h2>週間チャレンジランキング</h2>
+<% @weekly_goals_rank.each do |goal_rank| %>
+    <%= goal_rank[:rank].to_s + "位" %>
+    <%= "獲得チーズ" + goal_rank[:quantity].to_s + "個"%>
+    <%= "「" + goal_rank[:goal_data].title + "」" %>
+    <%= goal_rank[:goal_user_id].name + "さん" %>
+    <%= goal_rank[:goal_setting_date] %>
+    <%= goal_rank[:limit_time] %>
+    <%= link_to"詳細へ", user_goal_path(goal_rank[:goal_user_id], goal_rank[:goal_id]) %>
     <hr>
 <% end %>
 

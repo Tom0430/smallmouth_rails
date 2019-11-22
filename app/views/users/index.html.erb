@@ -1,0 +1,11 @@
+<% @users.each do |user| %>
+    <% if user.image.present? %>
+        <%= user.image %>
+    <% end %>
+    <%= user.name %>
+    <%= "達成したチャレンジ " + user.goals.where(status: 1).count.to_s + "個" %>
+    <%= link_to"プロフィールをみる", user_path(user) %>
+    <hr>
+<% end %>
+
+

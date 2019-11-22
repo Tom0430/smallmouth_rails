@@ -13,47 +13,85 @@
  *= require_tree .
  *= require_self
  */
-// @import "materialize/components/color-variables";
-// $primary-color: color("blue", "lighten-2") !default;
-// $secondary-color: color("yellow", "base") !default;
-// @import 'materialize';
-
+ @import "bootstrap"; 
  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN','Wawati SC','Osaka','Skia','HanziPen SC',sans-serif;
  }
  .clearfix::after {
     content: "";
     display: block;
     clear: both;
  }
+
+
  hr {
     height: 1px;
     border: none;
     border-top: 1px #E0E0E0 solid;
- }
-
-
-.nav-wrapper{
-    position: static;
-    right: 0;
-    left: 0;
-    top: 0;
-    height: 10%;
-    background-color: #ffc107;
-
-    ul{
-        list-style: none;
-    }
 }
 
+@keyframes move-stripe2 {
+    0% {  background-position-x: 0;  }
+    100% {  background-position-x: -34px;  }
+}
+.section2 {
+    background: url("01.png");
+    animation: move-stripe2 1s infinite linear;
+
+    .container{
+        margin: 0;
+        padding: 0;
+    }
+    .md-form{
+        float: right;
+        width: 30%;
+        height: 100%;
+        margin-top: 13px;
+
+        input[type="text"]{
+            width: 75%;
+            height: 100%;
+        }
+        #headersubmit{
+            display: none;
+        }
+    }
+    .navbar-brand{
+        // width: 10%;
+        padding: auto 0 auto 15px;
+    }
+    .navbar{
+        margin-bottom: 0;
+    }
+    #mouse_img{
+            margin-bottom: 6px;
+    }
+}
+        #sidebar{
+            background-image: url("sidebar.jpg");
+            background-size: contain;
+            height: 90vh;
+
+            .user_image{
+                margin: 0 26%;
+            }
+
+            .banner{
+                color: #327AB7;
+                line-height: 300%;
+                text-align: center;
+            }
+        }
+
 footer{
-    position: absolute;
+    position: fixed;
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: #ffc107;
+    background-color: #FFDC39;
 }
 
 .footer-text{
