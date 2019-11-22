@@ -3,7 +3,6 @@ class UsersController < ApplicationController
         @users = User.all.includes(:goals)
     end
     def show
-        binding.pry
         @user = User.find(params[:id])
     end
     def edit
@@ -13,7 +12,7 @@ class UsersController < ApplicationController
     def update
         user = User.find(params[:id])
         if user.update(user_params)
-        redirect_to user_path(user.id)
+            redirect_to user_path(user.id)
         else
             redirect_to about_path
         end

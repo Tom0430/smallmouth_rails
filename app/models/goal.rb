@@ -10,6 +10,7 @@ class Goal < ApplicationRecord
     # Rateにgoalを内部結合したとき(joins(:goal))は、クラス自体はRateのままなので、このメソッドが使えない。ので、mergeメソッドでRateクラスにこのメソッドを移譲している。
     # => Rate.joins(:goal).merge(Goal.weekly)
     scope :weekly, -> { where( created_at: 1.weeks.ago.beginning_of_day..Time.zone.now.end_of_day ) }
+
     # enumの値を入力として、それに応じた現在の時刻 + limit_timeがdatetimeで返ってくるメソッド
     def remaining_time
         now = self.created_at
