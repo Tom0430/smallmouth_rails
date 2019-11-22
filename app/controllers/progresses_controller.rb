@@ -1,7 +1,6 @@
 class ProgressesController < ApplicationController
     def create
         goal = Goal.find(params[:goal_id])
-        # binding.pry
         progress = goal.progresses.new(progress_params)
         progress.goal_id = goal.id
         progress.save
@@ -9,6 +8,6 @@ class ProgressesController < ApplicationController
     end
     private
     def progress_params
-        params.require(:progress).permit(:user_id,:goal_id,:body, :progress_image)
+      params.require(:progress).permit(:user_id,:goal_id,:body, :progress_image, :progress_video)
     end
 end

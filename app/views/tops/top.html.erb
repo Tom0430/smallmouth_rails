@@ -1,17 +1,20 @@
 <h1>SmallMouthへようこそ</h1>
 <p>SmallMouthに遊びにきてくれてありがとうございます。</p>
-<p>このサイトは、小さな目標を達成するためのサイトです。</p>
+<p>このサイトは、あなたの、みんなの小さなチャレンジを応援するためのサイトです。</p>
 <p>やらなきゃいけないことなんだけど中々手が出ない...</p>
 <p>そんな時はここに投稿して、たくさんの人に”やるぞ！”と宣言しちゃいましょう！</p>
-<p>大口を叩くような無茶はせず、小さなことからコツコツとこなして行きませんか？</p>
+<p>大口を叩くような無茶はせず、小さなことからコツコツとこなしていきませんか？</p>
+<hr>
 
 <% if user_signed_in? %>
-<%= link_to"新しい目標を立てる", new_user_goal_path(current_user.id) %>
+    <%= link_to"新しいチャレンジ", new_user_goal_path(current_user.id) %>
+    <hr>
+<% else %>
+    <%= link_to"新規ユーザー登録", new_user_registration_path %>
+    <hr>
+    <p>すでに会員の方は<%= link_to"ログイン", new_user_session_path %></p>
+    <hr>
 <% end %>
-<p>みんなの立てた<%= link_to"目標一覧へ", goals_path %></p>
-<hr>
-<%= link_to"新規ユーザー登録", new_user_registration_path %>
-<hr>
-<p>すでに会員の方は<%= link_to"ログイン", new_user_session_path %></p>
-<hr>
-<P>詳しい使い方は<%= link_to"こちら", about_path %></p>
+    <p><%= link_to"みんなのチャレンジ", goals_path %>をみる</p>
+    <hr>
+    <p>詳しい使い方は<%= link_to"こちら", about_path %></p>

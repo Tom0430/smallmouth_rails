@@ -9,6 +9,7 @@ ja:
         limit3d: "3日間"
         limit1w: "1週間"
         limit5s: "5秒間"
+        limit1m: "1分間"
   activerecord:
     errors:
       messages:
