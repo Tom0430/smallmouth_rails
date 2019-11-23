@@ -29,4 +29,4 @@ production:
   collation: utf8mb4_general_ci
   host: rds-mysql-server.c9f9ruawmnlu.us-east-2.rds.amazonaws.com
   username: root
-  password: hogehoge
+  password: 5589tttom
