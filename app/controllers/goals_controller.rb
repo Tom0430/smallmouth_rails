@@ -1,6 +1,5 @@
 class GoalsController < ApplicationController
     def new
-        @user = current_user
         @goal = Goal.new
     end
 
@@ -15,14 +14,15 @@ class GoalsController < ApplicationController
     end
 
     def index
-        if params[:search].blank?
-            @goals = Goal.all.includes(:user).order(id: "DESC")
-        else
-            title = Goal.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
-            detail = Goal.where("detail LIKE ?", "%#{params[:search]}%").order(id: "DESC")
-            user = Goal.joins(:user).where("name LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+        # 検索したときには検索結果を、そうでない時は一覧表示
+        if params[:search].present?
+            title = Goal.where(published: true).where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+            detail = Goal.where(published: true).where("detail LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+            user = Goal.where(published: true).joins(:user).where("name LIKE ?", "%#{params[:search]}%").order(id: "DESC")
             merged_result = ( title | detail )
             @goals = ( merged_result | user )
+        else
+            @goals = Goal.where(published: true).includes([:user, :rates]).order(id: "DESC")
         end
     end
 

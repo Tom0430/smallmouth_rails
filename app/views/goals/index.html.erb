@@ -1,18 +1,43 @@
-<h2>みんなのチャレンジ</h2>
+<%
+=begin%>
+ 
 <div>
-    <% @goals.each do |goal| %>
-        <div>
-            <%= link_to user_goal_path(goal.user.id, goal.id) do %>
+
+            
                 <% if goal.user.image.present? %>
                     <%= image_tag goal.user.image.url, size:'100x100' %>
                 <% else %>
                     <%= image_tag "no_image.jpeg", :size => '100x100', class:"user_image" %>
                 <% end %>
-                <span><%= goal.user.name %>さん</span>
-                <%= "「" + goal.title + "」" %>
-                <%= "投稿日時" + goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-                <%= "期間" + goal.limit_time_i18n %>
-            <% end %>
+
+                
+                
+            
+        </div>
+    
+<%
+=end%>
+<h2>みんなのチャレンジ</h2>
+<div class="cp_timeline03">
+    <% @goals.each do |goal| %>
+        <%= link_to user_goal_path(goal.user.id, goal.id) do %>
+        <div class="timeline_group">
+            <div class="timeline_item">
+                <div class="time">
+                    <span class="time_day">14</span>
+                    <span class="time_month">Aug</span>
+                </div>
+                <div class="desc">
+                    <p class="flag"><%= "「" + goal.title + "」" %></p>
+                    <%= goal.user.name + "さん"%>
+                    <%= "投稿日時 " + goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+                    <%= "期間 " + goal.limit_time_i18n %>
+                    <% if goal.rates.where("quantity > 0 ").sum(:quantity) > 0 %>
+                        <%= "獲得チーズ数 " + goal.rates.where("quantity > 0 ").sum(:quantity).to_s + "個" %>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
         </div>
     <% end %>
-<div>
+</div>

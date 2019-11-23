@@ -6,9 +6,9 @@
     <%= "チャレンジ詳細"%>
     <%= @goal.detail %>
     <hr>
-    <%= "チーズ合計獲得数" + @goal.rates.sum(:quantity).to_s + "個" %>
+    <%= "チーズ合計獲得数 " + @goal.rates.sum(:quantity).to_s + "個" %>
     <hr>
-    <%= "投稿者名" + @goal.user.name + "さん" %>
+    <%= "投稿者 " + @goal.user.name + "さん" %>
     <hr>
 
     <%# カウントダウンタイマー表示 時間経過,結果を選択後表示の切り替え %>

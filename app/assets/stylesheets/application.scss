@@ -37,9 +37,14 @@
     0% {  background-position-x: 0;  }
     100% {  background-position-x: -34px;  }
 }
-.section2 {
+.header {
     background: url("01.png");
     animation: move-stripe2 1s infinite linear;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
 
     .container{
         margin: 0;
@@ -70,21 +75,24 @@
             margin-bottom: 6px;
     }
 }
-        #sidebar{
-            background-image: url("sidebar.jpg");
-            background-size: contain;
-            height: 90vh;
+#sidebar{
+    background-image: url("sidebar.jpg");
+    background-size: contain;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    margin-top: 52px;
 
-            .user_image{
-                margin: 0 26%;
-            }
+    .user_image{
+        margin: 0 26%;
+    }
 
-            .banner{
-                color: #327AB7;
-                line-height: 300%;
-                text-align: center;
-            }
-        }
+    .banner{
+        color: #327AB7;
+        line-height: 300%;
+        text-align: center;
+    }
+}
 
 footer{
     position: fixed;
@@ -94,6 +102,10 @@ footer{
     background-color: #FFDC39;
 }
 
-.footer-text{
-    color: white;
-}
+.toTop {
+    height: 100%;
+    display: inline-block;
+    background: #327AB7;
+    color: #fff;
+    cursor: pointer;
+  }

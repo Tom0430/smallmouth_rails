@@ -11,8 +11,8 @@
   </head>
 
   <body>
-    <!--　ヘッダー　-->
-    <section class="section2">
+    <!-- ヘッダー -->
+    <section class="header">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg navbar-dark primary-color">
         <!-- Navbar brand -->
@@ -25,7 +25,7 @@
           <form class="form-inline">
             <div class="md-form">
               <%= form_tag(goals_path,method: :get) do %>
-                  <%= text_field_tag :search, "", placeholder: "みんなのチャレンジを検索" %>
+                  <%= text_field_tag :search, "", placeholder: "応援したいユーザー、チャレンジを検索" %>
                   <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil, :id => 'headersubmit' %>
               <% end %>
             </div>
@@ -35,12 +35,12 @@
       </nav>
       <!--/.Navbar-->
     </section>
-    <!--　ヘッダー　-->
+    <!-- ヘッダー -->
 
     <div>
       <div class="row">
         <div class="col-md-2">
-          <!--　サイドバー -->
+          <!-- サイドバー -->
           <div id="sidebar">
             <% if user_signed_in? %>
               <div>
@@ -75,17 +75,28 @@
               <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
             <% end %>
           </div>
-          <!--　サイドバー -->
+          <!-- サイドバー -->
         </div>
         <div class="col-md-10">
           <%= yield %>
         </div>
       </div>
     </div>
-    <!--　フッター -->
+    <!-- フッター -->
     <footer class="#fbc02d yellow darken-2">
-      <p class="footer-text">フッター</p>
+      <span class="toTop">ページトップへ</s>
     </footer>
-    <!--　フッター -->
+    <!-- フッター -->
   </body>
 </html>
+
+<script>
+  $(function(){
+  $('.toTop').click(function () {
+    $('body,html').animate({
+      scrollTop: 0
+    }, 800);
+    return false;
+  });
+});
+</script>

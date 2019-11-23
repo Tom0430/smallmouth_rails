@@ -19,7 +19,7 @@
 <h2>歴代ベストチャレンジランキング</h2>
 <% @goals_rank.each do |goal_rank| %>
     <%= goal_rank[:rank].to_s + "位" %>
-    <%= "獲得チーズ" + goal_rank[:quantity].to_s + "個"%>
+    <%= "総獲得チーズ" + goal_rank[:quantity].to_s + "個"%>
     <%= "「" + goal_rank[:goal_data].title + "」" %>
     <%= goal_rank[:goal_user_id].name + "さん" %>
     <%= goal_rank[:goal_setting_date] %>
@@ -31,7 +31,7 @@
 <h2>週間チャレンジランキング</h2>
 <% @weekly_goals_rank.each do |goal_rank| %>
     <%= goal_rank[:rank].to_s + "位" %>
-    <%= "獲得チーズ" + goal_rank[:quantity].to_s + "個"%>
+    <%= "週間獲得チーズ" + goal_rank[:quantity].to_s + "個"%>
     <%= "「" + goal_rank[:goal_data].title + "」" %>
     <%= goal_rank[:goal_user_id].name + "さん" %>
     <%= goal_rank[:goal_setting_date] %>
