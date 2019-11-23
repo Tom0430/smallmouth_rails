@@ -66,5 +66,8 @@ gem 'rails-i18n'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 gem 'kaminari', '~> 1.1.1'
-# gem 'materialize-sass', '~> 1.0.0'
-# gem 'material_icons'
+
+
+group :production do
+  gem 'mysql2'
+end
