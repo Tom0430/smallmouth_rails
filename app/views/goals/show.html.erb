@@ -122,7 +122,9 @@
     <hr>
     <% @goal.comments.each do |comment| %>
         <%= comment.body %>
-        <%= comment.user.name + "さん" %>
+        <%= link_to user_path(comment.user.id) do %>
+            <%= comment.user.name + "さん" %>
+        <% end %>
         <%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
         <hr>
     <% end %>

@@ -31,8 +31,8 @@ rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = $(DESTDIR)./.gem.20191107-48186-gpki77
-sitelibdir = $(DESTDIR)./.gem.20191107-48186-gpki77
+sitearchdir = $(DESTDIR)./.gem.20191125-62577-zcas5k
+sitelibdir = $(DESTDIR)./.gem.20191125-62577-zcas5k
 sitedir = $(rubylibprefix)/site_ruby
 rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
@@ -86,7 +86,7 @@ CCDLFLAGS = -fno-common
 CFLAGS   = $(CCDLFLAGS) $(cflags)  -pipe  $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir) 
 DEFS     = 
-CPPFLAGS = -DHAVE_RB_PROC_ARITY -DHAVE_RB_INTEGER_PACK -DHAVE_SQLITE3_INITIALIZE -DHAVE_SQLITE3_BACKUP_INIT -DHAVE_SQLITE3_COLUMN_DATABASE_NAME -DHAVE_SQLITE3_OPEN_V2 -DHAVE_SQLITE3_PREPARE_V2 -DHAVE_TYPE_SQLITE3_INT64 -DHAVE_TYPE_SQLITE3_UINT64 -I/usr/local/Cellar/sqlite/3.29.0/include -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
+CPPFLAGS = -DHAVE_RB_PROC_ARITY -DHAVE_RB_INTEGER_PACK -DHAVE_SQLITE3_INITIALIZE -DHAVE_SQLITE3_BACKUP_INIT -DHAVE_SQLITE3_COLUMN_DATABASE_NAME -DHAVE_SQLITE3_OPEN_V2 -DHAVE_SQLITE3_PREPARE_V2 -DHAVE_TYPE_SQLITE3_INT64 -DHAVE_TYPE_SQLITE3_UINT64 -I/usr/local/Cellar/sqlite/3.30.1/include -I/Users/takahashitomoya/.rbenv/versions/2.6.3/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
 CXXFLAGS = $(CCDLFLAGS) $(cxxflags)  $(ARCH_FLAG)
 ldflags  = -L. -L/Users/takahashitomoya/.rbenv/versions/2.6.3/lib  -fstack-protector-strong -L/usr/local/lib 
 dldflags = -L/Users/takahashitomoya/.rbenv/versions/2.6.3/lib  -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress 
@@ -124,8 +124,8 @@ TOUCH = exit >
 #### End of system configuration section. ####
 
 preload = 
-libpath = . $(libdir) /usr/local/Cellar/sqlite/3.29.0/lib
-LIBPATH =  -L. -L$(libdir) -L/usr/local/Cellar/sqlite/3.29.0/lib
+libpath = . $(libdir) /usr/local/Cellar/sqlite/3.30.1/lib
+LIBPATH =  -L. -L$(libdir) -L/usr/local/Cellar/sqlite/3.30.1/lib
 DEFFILE = 
 
 CLEANFILES = mkmf.log

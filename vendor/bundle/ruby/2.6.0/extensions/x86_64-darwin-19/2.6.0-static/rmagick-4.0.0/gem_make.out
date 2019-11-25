@@ -1,12 +1,9 @@
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/rmagick-4.0.0/ext/RMagick
-/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191107-73870-1b5lqkn.rb extconf.rb
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/rmagick-4.0.0/ext/RMagick
+/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191125-62577-bhp9v8.rb extconf.rb
 checking for brew... yes
 checking for clang... yes
 checking for pkg-config... yes
 checking for outdated ImageMagick version (<= 6.7.7)... no
-Usage: file [bcCdEhikLlNnprsvzZ0] [-e test] [-f namefile] [-F separator] [-m magicfiles] [-M magicfiles] file...
-       file -C -m magicfiles
-Try `file --help' for more information.
 checking for __GNUC__... yes
 checking for Ruby version >= 2.3.0... yes
 checking for magick/MagickCore.h... yes
@@ -17,7 +14,7 @@ creating Makefile
 
 
 ======================================================================
-Thu 07 Nov 19 12:10:01
+Mon 25 Nov 19 22:03:30
 This installation of RMagick 4.0.0 is configured for
 Ruby 2.6.3 (x86_64-darwin19) and ImageMagick 6.9.10
 ======================================================================
@@ -25,10 +22,10 @@ Ruby 2.6.3 (x86_64-darwin19) and ImageMagick 6.9.10
 
 Configured compile options: {:magick_version=>"6.9.10", :local_libs=>" -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16", :cflags=>" -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6 -std=gnu99", :cppflags=>" -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I/usr/local/Cellar/imagemagick@6/6.9.10-66/include/ImageMagick-6", :ldflags=>" -L/usr/local/Cellar/imagemagick@6/6.9.10-66/lib -lMagickCore-6.Q16", :defs=>[], :config_h=>"Makefile rmagick.h"}
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/rmagick-4.0.0/ext/RMagick
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/rmagick-4.0.0/ext/RMagick
 make "DESTDIR=" clean
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/rmagick-4.0.0/ext/RMagick
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/rmagick-4.0.0/ext/RMagick
 make "DESTDIR="
 compiling rmagick.c
 compiling rmdraw.c
@@ -52,6 +49,6 @@ compiling rmstruct.c
 compiling rmutil.c
 linking shared-object RMagick2.bundle
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/rmagick-4.0.0/ext/RMagick
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/rmagick-4.0.0/ext/RMagick
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 RMagick2.bundle ./.gem.20191107-73870-r3py4g
+/usr/bin/install -c -m 0755 RMagick2.bundle ./.gem.20191125-62577-1ld8b2u

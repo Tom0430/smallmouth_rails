@@ -1,5 +1,5 @@
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/nio4r-2.5.2/ext/nio4r
-/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191107-48186-v6co9p.rb extconf.rb
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/nio4r-2.5.2/ext/nio4r
+/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191125-46072-mpu1l2.rb extconf.rb
 checking for unistd.h... yes
 checking for linux/aio_abi.h... no
 checking for sys/select.h... yes
@@ -11,10 +11,10 @@ checking for port_event_t in port.h... no
 checking for sys/resource.h... yes
 creating Makefile
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/nio4r-2.5.2/ext/nio4r
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/nio4r-2.5.2/ext/nio4r
 make "DESTDIR=" clean
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/nio4r-2.5.2/ext/nio4r
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/nio4r-2.5.2/ext/nio4r
 make "DESTDIR="
 compiling bytebuffer.c
 compiling monitor.c
@@ -90,6 +90,6 @@ In file included from nio4r_ext.c:7:
 compiling selector.c
 linking shared-object nio4r_ext.bundle
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/nio4r-2.5.2/ext/nio4r
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/nio4r-2.5.2/ext/nio4r
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nio4r_ext.bundle ./.gem.20191107-48186-2x6pv
+/usr/bin/install -c -m 0755 nio4r_ext.bundle ./.gem.20191125-46072-1atcvu2

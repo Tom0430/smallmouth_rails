@@ -26,7 +26,9 @@
     clear: both;
  }
 
-
+html {
+    height:100%;
+}
  hr {
     height: 1px;
     border: none;
@@ -34,6 +36,7 @@
 }
 
 body{
+    height:100%;
     margin-top: 52px;
 }
 
@@ -51,8 +54,15 @@ body{
     z-index: 999;
 
     .container{
-        margin: 0;
+        margin-right: 0;
+        margin-left: 0;
         padding: 0;
+    }
+    .row{
+        margin-right: 0;
+        margin-left: 0;
+        display: -webkit-flex;
+        display: flex;
     }
     .md-form{
         float: right;
@@ -79,16 +89,18 @@ body{
             margin-bottom: 6px;
     }
 }
+
 #sidebar{
     background-image: url("sidebar.jpg");
     background-size: contain;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    margin-top: 52px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10px;
+    // bottom:0;
 
-    .user_image{
-        margin: 0 25%;
+
+    .sidebar-user-image{
+        text-align: center;
         border-radius: 50%;
     }
 
@@ -97,6 +109,9 @@ body{
         line-height: 300%;
         text-align: center;
     }
+}
+#body{
+    height: 100vh;
 }
 
 footer{
@@ -108,7 +123,8 @@ footer{
 }
 
 .toTop {
-    height: 100%;
+    padding-top: 10px;
+    float: right;
     display: inline-block;
     background: #327AB7;
     color: #fff;

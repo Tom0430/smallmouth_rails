@@ -2,7 +2,8 @@ class UsersController < ApplicationController
     before_action :set_user, except: :index
 
     def index
-        @users = User.all.includes([goals: :rates])
+        users = User.all.includes([goals: :rates])
+        @users = Kaminari.paginate_array(users).page(params[:page]).per(9)
     end
 
     def show

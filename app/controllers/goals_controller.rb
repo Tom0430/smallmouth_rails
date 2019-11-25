@@ -26,10 +26,12 @@ class GoalsController < ApplicationController
             title = Goal.where(published: true).where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
             detail = Goal.where(published: true).where("detail LIKE ?", "%#{params[:search]}%").order(id: "DESC")
             user = Goal.where(published: true).joins(:user).where("name LIKE ?", "%#{params[:search]}%").order(id: "DESC")
-            merged_search_result = ( title | detail )
-            @goals = ( merged_search_result | user )
+            result = ( title | detail )
+            merged_search_result = ( result | user )
+            @goals = Kaminari.paginate_array(merged_search_result).page(params[:page]).per(10)
         else
-            @goals = Goal.where(published: true).includes([:user, :rates]).order(id: "DESC")
+            goals = Goal.where(published: true).includes([:user, :rates]).order(id: "DESC")
+            @goals = Kaminari.paginate_array(goals).page(params[:page]).per(9)
         end
     end
 

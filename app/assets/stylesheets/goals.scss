@@ -17,6 +17,7 @@
 .cp_timeline03 {
     position: relative;
     margin: 3em auto;
+
 }
 .cp_timeline03:before {
     position: absolute;
@@ -82,7 +83,7 @@
     border: solid 3px #2259ff;
 }
 #failed-desc {
-    border: solid 3px red;
+    border: solid 3px rgb(231, 146, 130);
 }
 .cp_timeline03 .desc .flag {
     font-size: 1.2em;

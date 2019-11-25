@@ -1,17 +1,5 @@
 ---
 ja:
-  enums:
-    goal:
-      limit_time:
-        limit1m: "1分"
-        limit8h: "8時間"
-        limit1d: "24時間"
-        limit3d: "3日間"
-        limit1w: "1週間"
-      status:
-        trying: "継続中です"
-        achieved: "達成されました"
-        failed: "達成できませんでした"
   activerecord:
     errors:
       messages:

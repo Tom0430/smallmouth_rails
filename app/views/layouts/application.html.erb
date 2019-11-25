@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SmallMouth</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.cssp">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    
-  </head>
+<head>
+  <title>SmallMouth</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-  <body>
+<body>
     <%# ヘッダー　%>
     <section class="header">
       <%#!--Navbar-- %>
@@ -92,17 +90,18 @@
       <span class="toTop">ページトップへ</s>
     </footer>
     <!-- フッター -->
-  </body>
+</body>
+
 </html>
 
 <script>
-  $(function(){
-  $('.toTop').click(function () {
+  $(function () {
+    $('.toTop').click(function () {
 
-    $('body,html').animate({
-      scrollTop: 0
-    }, 800);
-    return false;
+      $('body,html').animate({
+        scrollTop: 0
+      }, 800);
+      return false;
+    });
   });
-});
 </script>

@@ -1,15 +1,15 @@
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.5/ext/bootsnap
-/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191107-48186-1m3jbq3.rb extconf.rb
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.5/ext/bootsnap
+/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191125-46072-1k27mm.rb extconf.rb
 creating Makefile
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.5/ext/bootsnap
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.5/ext/bootsnap
 make "DESTDIR=" clean
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.5/ext/bootsnap
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.5/ext/bootsnap
 make "DESTDIR="
 compiling bootsnap.c
 linking shared-object bootsnap/bootsnap.bundle
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.5/ext/bootsnap
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.5/ext/bootsnap
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20191107-48186-g9ward/bootsnap
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20191125-46072-tbdzx5/bootsnap

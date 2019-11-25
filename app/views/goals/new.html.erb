@@ -8,7 +8,7 @@
     <hr>
 
 
-    <%= f.select :limit_time, [['1分後まで',"limit1m"], ['8時間後まで', "limit8h" ], ['１日後まで',"limit1d" ], ['3日後まで',"limit3d" ], ['7日後まで',"limit7d" ]],
+    <%= f.select :limit_time, [['1分後まで',"limit1m"], ['8時間後まで', "limit8h" ], ['１日後まで',"limit1d" ], ['3日後まで',"limit3d" ], ['7日後まで',"limit1w" ]],
     {include_blank: '期限はいつまで？'}, class: 'limit_box' %>
 
     <%= f.submit "絶対にやり遂げよう！" %>
