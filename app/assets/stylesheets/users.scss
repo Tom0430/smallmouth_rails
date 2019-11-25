@@ -1,3 +1,93 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.cp_timeline03 {
+    position: relative;
+    margin: 3em auto;
+}
+.cp_timeline03:before {
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    content: '';
+    background-color: #006064;
+    left: 30px;
+}
+.cp_timeline03 .timeline_group {
+    position: relative;
+}
+.cp_timeline03 .timeline_group:not(:first-of-type) {
+    margin-top: 4rem;
+}
+.cp_timeline03 .time_year {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem 1.5rem;
+    color: #fff;
+    background-color: #00838F;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.cp_timeline03 .timeline_item {
+    margin-bottom: 1em;
+    position: relative;
+    padding-left: 80px;
+}
+.cp_timeline03 .timeline_item:not(:last-of-type) {
+    margin-bottom: 2em;
+}
+
+.cp_timeline03 .time {
+    position: absolute;
+    left: 0;
+    box-sizing: border-box;
+    min-width: 60px;
+    min-height: 60px;
+    padding: 0.5em 0.5em;
+    text-align: center;
+    color: #fff;
+    background-color: #26C6DA;
+    top: 50%;
+    margin-top: -33px;
+    border-radius: 65px;
+}
+.cp_timeline03 .desc {
+    padding: 0.5em 1em;
+    border-left: 3px solid #26C6DA;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    font-size: 0.9em;
+}
+.cp_timeline03 .desc .flag {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 0.3em;
+}
+@media only screen and (max-width: 767px) {
+    .cp_timeline03:before {
+        left: 0;
+    }
+    .cp_timeline03 .timeline_group {
+        padding-top: 40px;
+    }
+    .cp_timeline03 .timeline_item {
+        padding-top: 60px;
+        padding-left: 20px;
+    }
+    .cp_timeline03 .timeline_item:before {
+        top: 90px;
+    }
+    .cp_timeline03 .user-image-circle {
+        top: 40px;
+        border-radius: 0 20px 20px 0;
+        min-height: 2em;
+        margin-right: 2%;
+    }
+    .cp_timeline03 .desc {
+        font-size: 0.8em;
+    }
+}
+

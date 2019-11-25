@@ -1,15 +1,16 @@
-<%= form_for [current_user, @goal] do |f| %>
+<div class= "new-goal-wrapeer">
+    <%= form_for [current_user, @goal] do |f| %>
+    <%= f.label :"新しいチャレンジ" %>
+    <%= f.text_field :title, size: "100x10" %>
+    <hr>
+    <%= f.label :"チャレンジの内容を細かく具体的に書いてみましょう" %>
+    <%= f.text_area :detail, size: "10x10", class: "form-control"%>
+    <hr>
 
-<%= f.label :"新しい目標" %>
-<%= f.text_field :title %>
-<hr>
-<%= f.label :"目標を具体的にいうと？" %>
-<%= f.text_area :detail %>
-<hr>
 
+    <%= f.select :limit_time, [['1分後まで',"limit1m"], ['8時間後まで', "limit8h" ], ['１日後まで',"limit1d" ], ['3日後まで',"limit3d" ], ['7日後まで',"limit7d" ]],
+    {include_blank: '期限はいつまで？'}, class: 'limit_box' %>
 
-<%= f.select :limit_time, [['30秒後',"limit30s"], ['６時間後', "limit6h" ], ['１日後まで',"limit1d" ], ['3日後まで',"limit3d" ], ['7日後まで',"limit7d" ], ['5秒後まで',"limit5s" ], ['１分後まで',"limit1m" ]],
-{include_blank: '期限はいつまで？'}, class: 'limit_box' %>
-
-<%= f.submit "絶対にやり遂げよう！" %>
-<% end %>
+    <%= f.submit "絶対にやり遂げよう！" %>
+    <% end %>
+</div>
