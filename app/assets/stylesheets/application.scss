@@ -33,6 +33,10 @@
     border-top: 1px #E0E0E0 solid;
 }
 
+body{
+    margin-top: 52px;
+}
+
 @keyframes move-stripe2 {
     0% {  background-position-x: 0;  }
     100% {  background-position-x: -34px;  }
@@ -84,7 +88,8 @@
     margin-top: 52px;
 
     .user_image{
-        margin: 0 26%;
+        margin: 0 25%;
+        border-radius: 50%;
     }
 
     .banner{

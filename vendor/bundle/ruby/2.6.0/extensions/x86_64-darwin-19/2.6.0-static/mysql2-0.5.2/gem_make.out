@@ -1,5 +1,5 @@
 current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/mysql2-0.5.2/ext/mysql2
-/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191123-10187-rob72a.rb extconf.rb
+/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191123-11704-5sokon.rb extconf.rb
 checking for rb_absint_size()... yes
 checking for rb_absint_singlebit_p()... yes
 checking for rb_wait_for_single_fd()... yes

@@ -1,11 +1,31 @@
-<% @users.each do |user| %>
-    <% if user.image.present? %>
-        <%= user.image %>
+<h2>みんなのチャレンジ</h2>
+<div class="cp_timeline03">
+    <% @users.each do |user| %>
+        <div class="timeline_group">
+            <div class="timeline_item">
+                <div class="time">
+                    <span class="user-image-circle">
+                    <%= link_to user_path(user.id) do %>
+                        <% if user.image.present? %>
+                            <%= image_tag user.image.url, size:'70x70', class:"rank-user-img" %>
+                        <% else %>
+                            <%= image_tag "clicked.png", :size => '70x70', class:"rank-user-img" %>
+                        <% end %>
+                    <% end %>
+                    </span>
+                </div>
+                <div class="desc">
+                <%= link_to user_path(user.id) do %>
+                    <%= user.name + "さん"%>
+                <% end %>
+                <div>
+                    <%= "達成目標数 " + user.goals.where(status: 1).count.to_s + "個" %>
+                </div>
+                <div>
+                    <%= "総獲得チーズ数 " + user.goals.joins(:rates).where(published: true).sum(:quantity).to_s + "個" %>
+                </div>
+                </div>
+            </div>
+        </div>
     <% end %>
-    <%= user.name %>
-    <%= "達成したチャレンジ " + user.goals.where(status: 1).count.to_s + "個" %>
-    <%= link_to"プロフィールをみる", user_path(user) %>
-    <hr>
-<% end %>
-
-
+</div>

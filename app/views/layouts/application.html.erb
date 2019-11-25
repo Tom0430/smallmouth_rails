@@ -6,36 +6,39 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.cssp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    
   </head>
 
   <body>
-    <!-- ヘッダー -->
+    <%# ヘッダー　%>
     <section class="header">
-      <!--Navbar-->
+      <%#!--Navbar-- %>
       <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-        <!-- Navbar brand -->
+        <%#!-- Navbar brand -- %>
         <div class="navbar-brand" href="#">
           <span><%= link_to "SmallMouth", root_path %></span>
           <span><%= image_tag("mouse.png", :id => "mouse_img", :size =>'30x30')%></span>
         </div>
-        <!-- Collapsible content -->
+        <%# -- Collapsible content -- %>
         <div class="collapse navbar-collapse" id="basicExampleNav">
-          <form class="form-inline">
+
             <div class="md-form">
               <%= form_tag(goals_path,method: :get) do %>
                   <%= text_field_tag :search, "", placeholder: "応援したいユーザー、チャレンジを検索" %>
                   <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil, :id => 'headersubmit' %>
               <% end %>
             </div>
-          </form>
+
         </div>
-        <!-- Collapsible content -->
+        <%# -- Collapsible content -- %>
       </nav>
-      <!--/.Navbar-->
+      <%#!--Navbar-- %>
     </section>
-    <!-- ヘッダー -->
+    <%# ヘッダー　%>
 
     <div>
       <div class="row">
@@ -47,7 +50,7 @@
                 <% if current_user.image.present? %>
                   <%= image_tag current_user.image.url, size:'100x100', class:"user_image" %>
                 <% else %>
-                  <%= image_tag "no_image.jpeg", :size => '100x100', class:"user_image" %>
+                  <%= image_tag "noimage.png", :size => '100x100', class:"user_image" %>
                 <% end %>
               </div>
               <div class="banner"><%= current_user.name %>さん</div>
@@ -67,12 +70,14 @@
               <div class="banner"><%= link_to"継続中のチャレンジ", trying_list_user_path(current_user.id) %></div>
               <div class="banner"><%= link_to"ランキング", ranking_path %></div>
               <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
+              <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
               <div class="banner"><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></div>
               <div class="banner"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
             <% else %>
               <div class="banner"><%= link_to "新規会員登録", new_user_registration_path %></div>
               <div class="banner"><%= link_to "ログイン", new_user_session_path %></div>
               <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
+              <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
             <% end %>
           </div>
           <!-- サイドバー -->
@@ -93,6 +98,7 @@
 <script>
   $(function(){
   $('.toTop').click(function () {
+
     $('body,html').animate({
       scrollTop: 0
     }, 800);

@@ -1,20 +1,73 @@
-<h2>ユーザー情報</h2>
+<h3>ユーザー情報</h3>
 
-<%= @user.name %>
-<%= @user.profile_text %>
 <% if @user.image? %>
     <%= image_tag @user.image.url %>
 <% end %>
-<p>今までに達成した目標</p>
-<p>30秒の目標 <%= @user.goals.where(limit_time: "limit30s" ).count %>個</p>
-<p>6時間の目標 <%= @user.goals.where(limit_time: "limit6h" ).count %>個</p>
+<%= @user.name + "さん" %>
+<hr>
+<p>自己紹介</p>
+<%= @user.profile_text %>
+<hr>
+<p>今までに達成したチャレンジ</p>
+<p>1分の目標 <%= @user.goals.where(limit_time: "limit1m" ).count %>個</p>
+<p>8時間の目標 <%= @user.goals.where(limit_time: "limit8h" ).count %>個</p>
 <p>24時間の目標 <%= @user.goals.where(limit_time: "limit1d" ).count %>個</p>
 <p>3日間の目標 <%= @user.goals.where(limit_time: "limit3d" ).count %>個</p>
 <p>1週間の目標 <%= @user.goals.where(limit_time: "limit1w" ).count %>個</p>
-<p>5秒間の目標 <%= @user.goals.where(limit_time: "limit5s" ).count %>個</p>
-
+<hr>
+<%= "総獲得チーズ数 " + @user.goals.joins(:rates).where(published: true).sum(:quantity).to_s + "個" %>
+<hr>
 <%= link_to"ユーザー情報編集", edit_user_path %>
+<hr>
 <%= link_to"挑戦中の目標一覧", trying_list_user_path %>
+<hr>
 <%= link_to"達成した目標一覧", achieved_list_user_path %>
+<hr>
 <%= link_to"達成できなかった目標一覧", failed_list_user_path %>
+
+
+
+<canvas id="myChart" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["1分間", "８時間", "24時間", "3日間", "7日間"],
+        datasets: [{
+            label: '達成したチャレンジ数',
+            data: [
+                <%= @user.goals.where(limit_time: "limit1m" ).count %>,
+                <%= @user.goals.where(limit_time: "limit8h" ).count %>,
+                <%= @user.goals.where(limit_time: "limit1d" ).count %>,
+                <%= @user.goals.where(limit_time: "limit3d" ).count %>,
+                <%= @user.goals.where(limit_time: "limit1w" ).count %>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
 
