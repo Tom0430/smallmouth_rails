@@ -13,6 +13,15 @@ ja:
         achieved: "達成されました"
         failed: "達成できませんでした"
   activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 名前
+      goal:
+        title: チャレンジ名
+        detail: チャレンジ詳細
+        limit_time: 期限
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

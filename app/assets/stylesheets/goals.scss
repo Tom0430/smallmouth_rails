@@ -17,6 +17,7 @@
 .cp_timeline03 {
     position: relative;
     margin: 3em auto;
+    
 
 }
 .cp_timeline03:before {
@@ -80,7 +81,7 @@
     font-size: 0.9em;
 }
 #achieved-desc {
-    border: solid 3px #2259ff;
+    border: solid 3px #4e78f5;
 }
 #failed-desc {
     border: solid 3px rgb(231, 146, 130);
@@ -132,4 +133,7 @@
 
 .new-goal-wrapeer{
     margin-top: 20px;
+}
+.paginate{
+    margin-bottom: 100px;
 }

@@ -16,14 +16,14 @@
 <hr>
 
 <%# チャレンジの公開、非公開の表示 %>
-<% if current_user.id == @goal.user.id %>
+<% if user_signed_in? && current_user.id == @goal.user.id %>
     <% if @goal.published == true %>
         <%= "このチャレンジは公開中です" %>
     <% else @goal.published == false %>
         <%= "このチャレンジは非公開です。非公開中のチャレンジの獲得チーズ数はランキングにカウントされません" %>
     <% end %>
     <%# チャレンジの公開、非公開を切り替える処理 %>
-    <%= form_for @goal, url: user_goal_path(current_user.id,@goal.id),method: "patch" do  |f| %>
+    <%= form_for @goal, url: user_goal_path(current_user, @goal),method: "patch" do  |f| %>
         <% if @goal.published == true %>
             <%= f.hidden_field :published, :value => 0 %>
             <%= f.submit "このチャレンジを非公開にする", class: "btn-lg btn-base-1 mt-20 pull-right" %>
@@ -32,15 +32,15 @@
             <%= f.submit "このチャレンジを公開する", class: "btn-lg btn-base-1 mt-20 pull-right" %>
         <% end %>
     <% end %>
+    <hr>
 <% end %>
-<hr>
 
 <%# カウントダウンタイマー表示 時間経過,結果を選択後表示の切り替え %>
-<% if @goal.status == "trying" && @goal.user.id == current_user.id %>
+<% if user_signed_in? && @goal.status == "trying" && @goal.user.id == current_user.id %>
     <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
-    <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user.id,@goal.id) %></div>
-    <div><%= link_to "達成できなかった", failed_user_goal_path(@goal.user.id,@goal.id) %></div>
-<% else %>
+    <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user, @goal) %></div>
+    <div><%= link_to "達成できなかった", failed_user_goal_path(@goal.user, @goal) %></div>
+<% elsif user_signed_in? && @goal.status != "trying" && @goal.user.id == current_user.id  %>
     <%= "このチャレンジは終了しました" %>
 <% end %>
 
@@ -50,13 +50,14 @@
     <%= image_tag("unclicked.png", :id => "black", :size =>'30x30')%>
         <span>== 素晴らしいチャレンジにチーズをあげよう！ ==></span>
     <%= image_tag("clicked.png", :id => "yellow", :size =>'30x30')%><br>
-    <%# すでに評価済なら数を表示 %>
+    <%# すでに評価しているなら評価数を表示 %>
     <% if @goal.rated_by?(current_user) %>
         <%= "あなたはこのチャレンジに" + @rate.quantity.to_s + "個のチーズをあげています。" %><br>
         <%= "個数を変更するならもう一度チーズの個数を選択してください。" %>
     <% end %>
-    <%= form_with(model: [current_user,@goal,@rate], remote: true, url: user_goal_rate_path(current_user.id,@goal.id)) do |f| %>
-        <%# チーズの画像を繰り返し表示 期限に合わせて表示しておく個数を変える %>
+    <% method_type = @rate.blank? ? "post" : "patch" %>
+    <%= form_with(model: [current_user,@goal,@rate], remote: true, url: user_goal_rate_path(current_user.id,@goal.id), method: :"#{method_type}") do |f| %>
+        <%# チーズの画像を繰り返し表示 期間に合わせて表示しておく個数 = 評価の最大数を変える %>
         <span class = "ratebox" >
         <% case @goal.limit_time %>
         <% when "limit1m" then %>
@@ -70,7 +71,7 @@
         <% else %>
             <% cheese_repeat = 10 %>
         <% end %>
-                <% cheese_repeat.times do |index| %>
+            <% cheese_repeat.times do |index| %>
                 <% if @rate.quantity && @rate.quantity >= index+1 %>
                     <%= image_tag("clicked.png", :data => { :cheese_index => index + 1 }, :class => "blacks", :size =>'60x60') %>
                 <% else %>
@@ -78,20 +79,20 @@
                 <% end %>
             <% end %>
         </span>
-
-        <!-- hidden_fieldで評価を持つテーブルのカラム用意。jsで値を埋め込むのでidを付与、評価後にsubmitを押す処理　-->
+        <!-- hidden_fieldで評価を持つテーブルのカラム用意。jsで値を埋め込むのでidを付与、評価後にsubmitを押す処理 -->
         <%= f.hidden_field :user_id, :value => current_user.id %>
         <%= f.hidden_field :goal_id, :value => @goal.id %>
         <%= f.hidden_field :quantity, :value => -1, :id => "ratequantity" %>
         <%= f.submit "送信", id:"ratesubmit", :style => "display: none;" %>
     <% end %>
+<hr>
 <% end %>
 <%# チーズの画像で評価機能 ここまで %>
-<hr>
+
 <%# チャレンジの過程投稿欄 %>
-<%if @goal.user.id == current_user.id %>
+<%if user_signed_in? && @goal.user.id == current_user.id %>
     <p>チャレンジの記録を残そう!</p>
-    <%= form_for [@user, @goal, @progress],url: user_goal_progress_path(current_user.id,@goal.id) do |f| %>
+    <%= form_for [@user, @goal, @progress],url: user_goal_progresses_path(current_user, @goal) do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
         <%= f.label :"頑張った瞬間の写真を投稿しちゃおう！"%>
         <%= f.file_field :progress_image %>
@@ -111,6 +112,9 @@
             <% end %>
             <%= progress.body %>
             <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+            <% if user_signed_in? && current_user.admin? %>
+                <%= link_to "delete", user_goal_progress_path(@goal.user, @goal, progress), method: :delete,data: { confirm: "本当に削除しますか?" } %>
+            <% end %>
             <hr>
         <% end %>
     <% end %>
@@ -126,16 +130,20 @@
             <%= comment.user.name + "さん" %>
         <% end %>
         <%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        <% if user_signed_in? && current_user.admin? %>
+            <%= link_to "delete", user_goal_comment_path(comment.user, @goal, comment), method: :delete,data: { confirm: "本当に削除しますか?" } %>
+        <% end %>
         <hr>
     <% end %>
 </div>
 
 <%# コメント投稿欄 %>
-<%= form_for [current_user, @goal, @comment],url:user_goal_comment_path(current_user.id,@goal.id) do |f| %>
-    <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-    <%= f.submit "送信する", class: "comment-submit btn-lg btn-base-1 mt-20 pull-right" %>
+<% if user_signed_in? %>
+    <%= form_for [current_user , @goal, @comment],url:user_goal_comments_path(current_user, @goal) do |f| %>
+        <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+        <%= f.submit "送信する", class: "comment-submit btn-lg btn-base-1 mt-20 pull-right" %>
+    <% end %>
 <% end %>
-
 
 <script>
     // カウントダウンタイマー

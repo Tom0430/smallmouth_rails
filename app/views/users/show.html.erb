@@ -1,3 +1,10 @@
+<% if flash[:notice] %>
+    <hr>
+    <div class="flash">
+        <%= flash[:notice] %>
+    </div>
+    <hr>
+<% end %>
 <h3>ユーザー情報</h3>
 
 <% if @user.image? %>
@@ -17,15 +24,19 @@
 <hr>
 <%= "総獲得チーズ数 " + @user.goals.joins(:rates).where(published: true).sum(:quantity).to_s + "個" %>
 <hr>
-<%= link_to"ユーザー情報編集", edit_user_path %>
-<hr>
+<% if user_signed_in? && current_user == @user %>
+    <%= link_to"ユーザー情報編集", edit_user_path %>
+    <hr>
+<% end %>
 <%= link_to"挑戦中のチャレンジ一覧", trying_list_user_path %>
 <hr>
 <%= link_to"達成したチャレンジ一覧", achieved_list_user_path %>
 <hr>
 <%= link_to"達成できなかったチャレンジ一覧", failed_list_user_path %>
+<div class="contents">
+<canvas id="myChart"></canvas>
 
-<%# <canvas id="myChart" width="10" height="10"></canvas> %>
+</div>
 <hr>
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
@@ -68,5 +79,15 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+var w = $('.contents').width();
+var h = $('.contents').height();
+$('#rader_result').attr('width', w);
+$('#rader_result').attr('height', h);
 </script>
 
+<style>
+.contents{
+    width: 90%;
+    height: 100%;
+}
+</style>

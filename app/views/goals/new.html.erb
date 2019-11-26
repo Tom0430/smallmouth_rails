@@ -1,10 +1,20 @@
+<%= form_for(@goal) do |f| %>
+    <% if @goal.errors.any? %>
+        <h2><%= @goal.errors.count %> 件のエラーが発生しました。</h2>
+        <ul>
+        <% @goal.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        </ul>
+    <% end %>
+<% end %>
 <div class= "new-goal-wrapeer">
     <%= form_for [current_user, @goal] do |f| %>
     <%= f.label :"新しいチャレンジ" %>
     <%= f.text_field :title, size: "100x10" %>
     <hr>
     <%= f.label :"チャレンジの内容を細かく具体的に書いてみましょう" %>
-    <%= f.text_area :detail, size: "10x10", class: "form-control"%>
+    <%= f.text_area :detail, size: "5x5", class: "form-control"%>
     <hr>
 
 

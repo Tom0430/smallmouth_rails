@@ -3,6 +3,9 @@ class Goal < ApplicationRecord
     has_many :progresses, dependent: :destroy
     has_many :comments, dependent: :destroy
     has_many :rates, dependent: :destroy
+    validates :title, presence: true, length: { maximum: 50 }
+    validates :detail, presence: true, length: { maximum: 500 }
+    validates :limit_time, presence: true
 
     enum limit_time: {limit1m: 0, limit8h: 1, limit1d: 2, limit3d: 3, limit1w: 4 }
     enum status: {trying: 0, achieved: 1, failed: 2}
@@ -12,7 +15,7 @@ class Goal < ApplicationRecord
     scope :weekly, -> { where( created_at: 1.weeks.ago.beginning_of_day..Time.zone.now.end_of_day ) }
     scope :onlyPublish, -> { where( published: true ) }
 
-    # enumの値を入力として、それに応じた現在の時刻 + limit_timeがdatetimeで返ってくるメソッド
+    # enumの値を入力として、それに応じた現在の時刻 + limit_timeがdatetimeで返ってくる
     def remaining_time
         now = self.created_at
         case self.limit_time_before_type_cast
@@ -30,7 +33,7 @@ class Goal < ApplicationRecord
         return remaining_time
     end
 
-    def rated_by?(current_user)
-        rates.where(user_id: current_user.id).exists?
+    def rated_by?(user)
+        rates.where(user_id: user.id).exists?
     end
 end
