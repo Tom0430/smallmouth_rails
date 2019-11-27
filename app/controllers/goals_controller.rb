@@ -42,7 +42,9 @@ class GoalsController < ApplicationController
         @comment = Comment.new
         @progress = Progress.new
         # idを見つけてあるならupdate,ないならcreateする。評価は１人１回までで数は変更できるように
-        @rate = Rate.find_or_initialize_by(user_id: current_user.id, goal_id: @goal.id)
+        if user_signed_in?
+            @rate = Rate.find_or_initialize_by(user_id: current_user.id, goal_id: @goal.id)
+        end
     end
 
     def achieved

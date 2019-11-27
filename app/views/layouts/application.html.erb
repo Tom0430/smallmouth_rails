@@ -55,17 +55,10 @@
               <div class="banner"><%= link_to "マイページ", user_path(current_user.id) %></div>
               <div class="banner">
                 <% if current_user.goals.where(status: 0).present? %>
-                  <%= link_to(user_goal_path(current_user.id,current_user.goals.where(status: 0).first.id)) do %>
-                    <%= "「" + current_user.goals.where(status: 0).first.title + "」" %>
-                  <% end %>
-                  <% if current_user.goals.where(status: 0).count >= 2 %>
-                    <%= " ＋その他" %>
-                  <% end %>
-                  <%= "チャレンジ中！" %>
+                  <%= link_to"継続中のチャレンジ", trying_list_user_path(current_user.id) %>
                 <% end %>
               </div>
               <div class="banner"><%= link_to"新しいチャレンジ", new_user_goal_path(current_user.id) %></div>
-              <div class="banner"><%= link_to"継続中のチャレンジ", trying_list_user_path(current_user.id) %></div>
               <div class="banner"><%= link_to"ランキング", ranking_path %></div>
               <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
               <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
