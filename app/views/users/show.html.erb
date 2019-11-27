@@ -1,3 +1,4 @@
+<%# エラ-メッセージ表示 %>
 <% if flash[:notice] %>
     <hr>
     <div class="flash">
@@ -24,24 +25,28 @@
 <hr>
 <%= "総獲得チーズ数 " + @user.goals.joins(:rates).where(published: true).sum(:quantity).to_s + "個" %>
 <hr>
+<%# 本人のみプロフィール編集へのリンク表示 %>
 <% if user_signed_in? && current_user == @user %>
     <%= link_to"ユーザー情報編集", edit_user_path %>
     <hr>
 <% end %>
+
 <%= link_to"挑戦中のチャレンジ一覧", trying_list_user_path %>
 <hr>
 <%= link_to"達成したチャレンジ一覧", achieved_list_user_path %>
 <hr>
 <%= link_to"達成できなかったチャレンジ一覧", failed_list_user_path %>
-<div class="contents">
-<canvas id="myChart"></canvas>
-
-</div>
 <hr>
+<h2>達成チャレンジ内訳</h2>
+<%# チャートjs %>
+<div class="contents">
+    <canvas id="myChart"></canvas>
+</div>
+
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'pie',
     data: {
         labels: ["1分間", "８時間", "24時間", "3日間", "7日間"],
         datasets: [{
@@ -66,18 +71,9 @@ var myChart = new Chart(ctx, {
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
             ],
-            borderWidth: 1
+            // borderWidth: 1
         }]
     },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
 });
 var w = $('.contents').width();
 var h = $('.contents').height();

@@ -22,6 +22,10 @@ ja:
         title: チャレンジ名
         detail: チャレンジ詳細
         limit_time: 期限
+      progress:
+        body: 記録の内容
+      comment:
+        body: コメント
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

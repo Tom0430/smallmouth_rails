@@ -1,13 +1,14 @@
-<%= form_for(@goal) do |f| %>
-    <% if @goal.errors.any? %>
-        <h2><%= @goal.errors.count %> 件のエラーが発生しました。</h2>
-        <ul>
-        <% @goal.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-        <% end %>
-        </ul>
+<%# エラーメッセージ表示 %>
+<% if @goal.errors.any? %>
+    <h2><%= @goal.errors.count %> 件のエラーが発生しました。</h2>
+    <ul>
+    <% @goal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
     <% end %>
+    </ul>
+    <hr>
 <% end %>
+
 <div class= "new-goal-wrapeer">
     <%= form_for [current_user, @goal] do |f| %>
     <%= f.label :"新しいチャレンジ" %>

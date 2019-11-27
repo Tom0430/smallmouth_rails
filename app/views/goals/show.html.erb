@@ -55,7 +55,7 @@
         <%= "あなたはこのチャレンジに" + @rate.quantity.to_s + "個のチーズをあげています。" %><br>
         <%= "個数を変更するならもう一度チーズの個数を選択してください。" %>
     <% end %>
-    <% method_type = @rate.blank? ? "post" : "patch" %>
+    <% method_type = @rate.quantity.blank? ? "post" : "patch" %>
     <%= form_with(model: [current_user,@goal,@rate], remote: true, url: user_goal_rate_path(current_user.id,@goal.id), method: :"#{method_type}") do |f| %>
         <%# チーズの画像を繰り返し表示 期間に合わせて表示しておく個数 = 評価の最大数を変える %>
         <span class = "ratebox" >
@@ -92,7 +92,16 @@
 <%# チャレンジの過程投稿欄 %>
 <%if user_signed_in? && @goal.user.id == current_user.id %>
     <p>チャレンジの記録を残そう!</p>
-    <%= form_for [@user, @goal, @progress],url: user_goal_progresses_path(current_user, @goal) do |f| %>
+    <% if @progress_error_catcher.present? %>
+        <h2><%= @progress_error_catcher.errors.count %> 件のエラーが発生しました。</h2>
+        <ul>
+        <% @progress_error_catcher.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        </ul>
+        <hr>
+    <% end %>
+    <%= form_for [current_user, @goal, @progress],url: user_goal_progresses_path(current_user, @goal) do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
         <%= f.label :"頑張った瞬間の写真を投稿しちゃおう！"%>
         <%= f.file_field :progress_image %>
@@ -103,15 +112,16 @@
 
 <%# チャレンジ過程表示 %>
 <div class="progress-wrapper">
-    <% if @goal.progresses.present? %>
+    <% if !@goal.progresses.empty? %>
         <p>チャレンジ達成までの道のり</p>
-        <hr>
         <% @goal.progresses.each do |progress| %>
             <% if progress.progress_image? %>
                 <%= image_tag progress.progress_image.url %>
             <% end %>
             <%= progress.body %>
-            <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+            <% if progress.created_at.present? %>
+                <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+            <% end %>
             <% if user_signed_in? && current_user.admin? %>
                 <%= link_to "delete", user_goal_progress_path(@goal.user, @goal, progress), method: :delete,data: { confirm: "本当に削除しますか?" } %>
             <% end %>
@@ -120,9 +130,18 @@
     <% end %>
 </div>
 
-<%# コメント表示 %>
+<%# コメント一覧表示 %>
+<% if @comment_error_catcher.present? %>
+        <h2><%= @comment_error_catcher.errors.count %> 件のエラーが発生しました。</h2>
+        <ul>
+        <% @comment_error_catcher.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        </ul>
+        <hr>
+    <% end %>
 <div class="comment-wrapper">
-    <p>コメント</p>
+    <p>コメント一覧</p>
     <hr>
     <% @goal.comments.each do |comment| %>
         <%= comment.body %>
