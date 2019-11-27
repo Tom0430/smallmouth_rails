@@ -1,7 +1,7 @@
 <h2>みんなのチャレンジ</h2>
 <p>枠に色のついていないチャレンジは継続中のチャレンジです。</p>
-<p>達成したチャレンジには、おめでとうの気持ちを込めてチーズをあげることができます。</p>
-<p>達成したチャレンジは青い枠線で囲まれているので、ぜひ覗いてチーズをあげてみてください。</p>
+<p>達成したチャレンジには、いいねの代わりにチーズを送ることができます。</p>
+<p>達成したチャレンジは青い枠線で囲まれているので、ぜひ覗いてチーズを送ってみてください。</p>
 <p>達成できなかったチャレンジは赤い枠線で囲まれています。達成できる目標の立て方の参考になるでしょう。</p>
 <div class="cp_timeline03">
     <% @goals.each do |goal| %>
@@ -18,7 +18,7 @@
                     <% end %>
                     </span>
                 </div>
-                <%# 達成した目標、失敗した目標のbackground-colorを変える %>
+                <%# 達成したチャレンジ、失敗したチャレンジの枠線の色を変える %>
                 <% if goal.status == "achieved" %>
                     <div class = "desc" id="achieved-desc">
                 <% elsif goal.status == "failed" %>
@@ -38,7 +38,12 @@
                         <%= "獲得チーズ数 " + goal.rates.where("quantity > 0 ").sum(:quantity).to_s + "個" %>
                     <% end %>
                 </div>
+                <%# 枠線の色を変えるdiv ここまで %>
+                <% if user_signed_in? && current_user.admin? %>
+                    <%= link_to "削除", user_goal_path(goal.user_id,goal.id), method: :delete,data: { confirm: "本当に削除しますか?" } %>
+                <% end %>
             </div>
         </div>
     <% end %>
 </div>
+<%= paginate @goals, class: "paginate" %>

@@ -1,14 +1,14 @@
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/puma-3.12.1/ext/puma_http11
-/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191107-48186-1ekj0hh.rb extconf.rb
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/puma-3.12.1/ext/puma_http11
+/Users/takahashitomoya/.rbenv/versions/2.6.3/bin/ruby -I /Users/takahashitomoya/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191125-62577-1ao61xc.rb extconf.rb
 checking for BIO_read() in -lcrypto... yes
 checking for SSL_CTX_new() in -lssl... yes
 checking for openssl/bio.h... yes
 creating Makefile
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/puma-3.12.1/ext/puma_http11
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/puma-3.12.1/ext/puma_http11
 make "DESTDIR=" clean
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/puma-3.12.1/ext/puma_http11
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/puma-3.12.1/ext/puma_http11
 make "DESTDIR="
 compiling http11_parser.c
 ext/puma_http11/http11_parser.c:44:18: warning: unused variable 'puma_parser_en_main' [-Wunused-const-variable]
@@ -36,6 +36,6 @@ void raise_error(SSL* ssl, int result) {
 compiling puma_http11.c
 linking shared-object puma/puma_http11.bundle
 
-current directory: /Users/takahashitomoya/Desktop/small_mouth/small_mouth/vendor/bundle/ruby/2.6.0/gems/puma-3.12.1/ext/puma_http11
+current directory: /Users/takahashitomoya/Desktop/rails_mouth/sm/vendor/bundle/ruby/2.6.0/gems/puma-3.12.1/ext/puma_http11
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 puma_http11.bundle ./.gem.20191107-48186-1gdv3xk/puma
+/usr/bin/install -c -m 0755 puma_http11.bundle ./.gem.20191125-62577-kz2zif/puma

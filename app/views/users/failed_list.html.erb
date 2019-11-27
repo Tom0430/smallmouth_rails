@@ -1,25 +1,12 @@
 <hr>
 <h3>達成できなかった目標一覧...</h3>
 <hr>
-<% if @goals.first.user.id == current_user  %>
-    <% @goals.each do |goal| %>
-        <%= link_to user_goal_path(goal.user.id, goal.id) do %>
-            <%= "「" + goal.title + "」" %>
-            <%= "期間 "+ goal.limit_time_i18n %>
-            <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-        <% end %>
-        <hr>
+<% @goals.each do |goal| %>
+    <%= link_to user_goal_path(goal.user.id, goal.id) do %>
+        <%= "「" + goal.title + "」" %>
+        <%= "期間 "+ goal.limit_time_i18n %>
+        <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
     <% end %>
-
-<% else %>
-    <% @goals.where(published: true).each do |goal| %>
-        <%= link_to user_goal_path(goal.user.id, goal.id) do %>
-            <%= "「" + goal.title + "」" %>
-            <%= "期間 "+ goal.limit_time_i18n %>
-            <%= goal.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-        <% end %>
-        <hr>
-    <% end %>
-<% end %>
+    <hr>
 <% end %>
 

@@ -13,28 +13,35 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap"; 
+@import "bootstrap"; 
  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN','Wawati SC','Osaka','Skia','HanziPen SC',sans-serif;
- }
- .clearfix::after {
+}
+.clearfix::after {
     content: "";
     display: block;
     clear: both;
- }
+}
 
 
- hr {
+html {
+    height:100%;
+}
+hr {
     height: 1px;
     border: none;
     border-top: 1px #E0E0E0 solid;
 }
 
 body{
+    height:100%;
     margin-top: 52px;
+}
+ul{
+    list-style: none;
 }
 
 @keyframes move-stripe2 {
@@ -51,8 +58,13 @@ body{
     z-index: 999;
 
     .container{
-        margin: 0;
+        margin-right: 0;
+        margin-left: 0;
         padding: 0;
+    }
+    .row{
+        margin-right: 0;
+        margin-left: 0;
     }
     .md-form{
         float: right;
@@ -79,16 +91,16 @@ body{
             margin-bottom: 6px;
     }
 }
+
 #sidebar{
     background-image: url("sidebar.jpg");
     background-size: contain;
-    height: 100vh;
     position: fixed;
-    top: 0;
-    margin-top: 52px;
+    top: 52px;
+    min-height: 100vh;
+    text-align: center;
 
     .user_image{
-        margin: 0 25%;
         border-radius: 50%;
     }
 
@@ -98,7 +110,9 @@ body{
         text-align: center;
     }
 }
-
+.col-md-10{
+    margin-bottom: 100px;
+}
 footer{
     position: fixed;
     right: 0;
@@ -108,9 +122,14 @@ footer{
 }
 
 .toTop {
-    height: 100%;
+    padding-top: 10px;
+    float: right;
     display: inline-block;
     background: #327AB7;
     color: #fff;
     cursor: pointer;
-  }
+}
+
+.box{
+    margin-bottom: 100px;
+}

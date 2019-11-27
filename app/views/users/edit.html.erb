@@ -1,13 +1,23 @@
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <h2><%= @user.errors.count %> 件のエラーが発生しました。</h2>
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        </ul>
+    <% end %>
+<% end %>
 <hr>
 <h3>ユーザー情報編集</h3>
 <hr>
 
 <%= form_for(@user) do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.label :"名前" %>
+    <%= f.text_field :name, size: "32x10",class: "user_name_field" %>
     <hr>
     <%= f.label :"自己紹介" %>
-    <%= f.text_area :profile_text %>
+    <%= f.text_area :profile_text, size: "30x4" %>
     <hr>
     <%= f.label :"プロフィール画像"%>
     <%= f.file_field :image %>

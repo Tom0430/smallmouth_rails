@@ -1,4 +1,4 @@
-<h2>みんなのチャレンジ</h2>
+<h2>チャレンジャー一覧</h2>
 <div class="cp_timeline03">
     <% @users.each do |user| %>
         <div class="timeline_group">
@@ -9,23 +9,29 @@
                         <% if user.image.present? %>
                             <%= image_tag user.image.url, size:'70x70', class:"rank-user-img" %>
                         <% else %>
-                            <%= image_tag "clicked.png", :size => '70x70', class:"rank-user-img" %>
+                            <%= image_tag "clicked.png", size: '70x70', class:"rank-user-img" %>
                         <% end %>
                     <% end %>
                     </span>
                 </div>
                 <div class="desc">
-                <%= link_to user_path(user.id) do %>
-                    <%= user.name + "さん"%>
-                <% end %>
-                <div>
-                    <%= "達成目標数 " + user.goals.where(status: 1).count.to_s + "個" %>
-                </div>
-                <div>
-                    <%= "総獲得チーズ数 " + user.goals.joins(:rates).where(published: true).sum(:quantity).to_s + "個" %>
-                </div>
+                    <%= link_to user_path(user.id) do %>
+                        <%= user.name + "さん"%>
+                    <% end %>
+                    <div>
+                        <%= "達成目標数 " + user.goals.where(status: 1).count.to_s + "個" %>
+                    </div>
+                    <div>
+                        <%= "総獲得チーズ数 " + user.goals.joins(:rates).where(published: true).sum(:quantity).to_s + "個" %>
+                    </div>
+                    <div>
+                        <% if user_signed_in? && current_user.admin? && !(current_user == user) %>
+                            <%= link_to "削除", user_path(user.id), method: :delete,data: { confirm: "本当に削除しますか？" } %>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
     <% end %>
+    <%= paginate @users, class: "paginate" %>
 </div>

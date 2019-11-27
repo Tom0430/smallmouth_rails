@@ -8,8 +8,8 @@ resources :users do
   resources :goals, :except => :index do
     get :achieved, on: :member
     get :failed, on: :member
-    resource :comment, only:[:create, :destroy]
-    resource :progress, only:[:create, :destroy]
+    resources :comments, only:[:create, :destroy]
+    resources :progresses, only:[:create, :destroy]
     resource :rate, only:[:create, :update]
   end
 end
