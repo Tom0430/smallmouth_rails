@@ -16,6 +16,7 @@ class RatesController < ApplicationController
     def ranking
         # ユーザーランキング 獲得評価数の高い順に表示
         user_id_and_quantities_arrays = Rate.joins(goal: :user).merge(Goal.onlyPublish).group("goals.user_id").sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
+        #ほしい情報をこちらで指定してviewに持っていく
         @users_rank = []
         user_id_and_quantities_arrays.first(10).each_with_index do |user_id_and_quantities_array, i|
             user_id = user_id_and_quantities_array[0]
@@ -27,7 +28,7 @@ class RatesController < ApplicationController
             }
             @users_rank.push(hash)
         end
-        # 週間ユーザーランキング
+        # 週間ユーザーランキング ユーザーランキングの範囲を現在時刻から１週間以内に狭める
         weekly_user_id_and_quantities_arrays = Rate.joins(goal: :user).merge(Goal.onlyPublish).merge(Goal.weekly).group("goals.user_id").sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1}
         @weekly_users_rank = []
         weekly_user_id_and_quantities_arrays.first(10).each_with_index do |user_id_and_quantities_array, i|
@@ -41,7 +42,7 @@ class RatesController < ApplicationController
             @weekly_users_rank.push(hash)
         end
 
-        # チャレンジランキング　評価の高いチャレンジを上から順位表示
+        # チャレンジランキング 評価の高いチャレンジを上から順位表示
         goal_id_and_quantities_arrays = Rate.joins(:goal).merge(Goal.onlyPublish).group(:goal_id).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1 }
         @goals_rank = []
         goal_id_and_quantities_arrays.first(10).each_with_index do |goal_id_and_quantities_array, i|
@@ -58,7 +59,7 @@ class RatesController < ApplicationController
             }
             @goals_rank.push(hash)
         end
-        #週間チャレンジランキング
+        #週間チャレンジランキング チャレンジランキングの範囲を現在時刻から１週間以内に狭める
         weekly_goal_id_and_quantities_arrays = Rate.joins(:goal).merge(Goal.onlyPublish).merge(Goal.weekly).group(:goal_id).sum(:quantity).sort{|(k1, v1), (k2, v2)| v2 <=> v1}
         @weekly_goals_rank = []
         weekly_goal_id_and_quantities_arrays.first(10).each_with_index do |goal_id_and_quantities_array, i|

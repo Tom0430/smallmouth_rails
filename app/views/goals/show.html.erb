@@ -1,3 +1,6 @@
+<%# このサイトの各機能がこのページに集まり、コードが長く読みづらくなっていることをお詫びします %>
+<%# サイトに触ってみて気になる機能のところだけでも読んでいただければ幸いです。 %>
+
 <hr>
 <%= "チャレンジ" %>
 <%= "「" + @goal.title + "」" %>
@@ -10,6 +13,8 @@
 <%= "このチャレンジは" + @goal.status_i18n %>
 <% if @goal.rates.sum(:quantity) > 0 %>
     <%= "チーズ合計獲得数 " + @goal.rates.sum(:quantity).to_s + "個" %>
+    <span><%= image_tag("clicked.png", :id => "yellow", :size =>'30x30')%></span>
+    <span><%= image_tag("mouse.png", :id => "mouse_img", :size =>'40x40')%></span>
 <% end %>
 <hr>
 <%= "期間 " + @goal.limit_time_i18n %>
@@ -45,19 +50,20 @@
 <% end %>
 
 <%# チーズの画像で評価機能 %>
-<%# 投稿者以外のログイン済ユーザーが評価できるように設定 %>
+<%# 投稿者以外のログインユーザーが評価できるように設定 %>
 <% if user_signed_in? && current_user.id != @goal.user.id && @goal.status == "achieved" %>
     <%= image_tag("unclicked.png", :id => "black", :size =>'30x30')%>
         <span>== 素晴らしいチャレンジにチーズをあげよう！ ==></span>
     <%= image_tag("clicked.png", :id => "yellow", :size =>'30x30')%><br>
-    <%# すでに評価しているなら評価数を表示 %>
+    <%# すでにユーザーが評価しているなら評価数を表示 %>
     <% if @goal.rated_by?(current_user) %>
         <%= "あなたはこのチャレンジに" + @rate.quantity.to_s + "個のチーズをあげています。" %><br>
         <%= "個数を変更するならもう一度チーズの個数を選択してください。" %>
     <% end %>
+    <%# 新しく評価するか、すでに評価しているかでform_withのパスを変える %>
     <% method_type = @rate.quantity.blank? ? "post" : "patch" %>
     <%= form_with(model: [current_user,@goal,@rate], remote: true, url: user_goal_rate_path(current_user.id,@goal.id), method: :"#{method_type}") do |f| %>
-        <%# チーズの画像を繰り返し表示 期間に合わせて表示しておく個数 = 評価の最大数を変える %>
+        <%# チーズの画像を繰り返し表示 チャレンジの期間に合わせて表示しておく個数 = 評価の最大数を変える %>
         <span class = "ratebox" >
         <% case @goal.limit_time %>
         <% when "limit1m" then %>
@@ -79,7 +85,7 @@
                 <% end %>
             <% end %>
         </span>
-        <!-- hidden_fieldで評価を持つテーブルのカラム用意。jsで値を埋め込むのでidを付与、評価後にsubmitを押す処理 -->
+        <!-- hidden_fieldで評価を持つテーブルのカラム用意。jsで値を埋め込むのでidを付与、評価後にsubmitを押す処理をしている -->
         <%= f.hidden_field :user_id, :value => current_user.id %>
         <%= f.hidden_field :goal_id, :value => @goal.id %>
         <%= f.hidden_field :quantity, :value => -1, :id => "ratequantity" %>
@@ -92,6 +98,7 @@
 <%# チャレンジの過程投稿欄 %>
 <%if user_signed_in? && @goal.user.id == current_user.id %>
     <p>チャレンジの記録を残そう!</p>
+    <%#エラーメッセージ %>
     <% if @progress_error_catcher.present? %>
         <h2><%= @progress_error_catcher.errors.count %> 件のエラーが発生しました。</h2>
         <ul>
@@ -101,8 +108,9 @@
         </ul>
         <hr>
     <% end %>
+    <%# エラーメッセージここまで %>
     <%= form_for [current_user, @goal, @progress],url: user_goal_progresses_path(current_user, @goal) do |f| %>
-        <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの過程をここに" %>
+        <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの記録をここに書いていきましょう、結果が出てからでもOKです。一緒に写真も投稿できます。" %>
         <%= f.label :"頑張った瞬間の写真を投稿しちゃおう！"%>
         <%= f.file_field :progress_image %>
         <%= f.submit "送信する", class: "challege-submit btn-lg btn-base-1 mt-20 pull-right" %>
@@ -113,7 +121,7 @@
 <%# チャレンジ過程表示 %>
 <div class="progress-wrapper">
     <% if !@goal.progresses.empty? %>
-        <p>チャレンジ達成までの道のり</p>
+        <p>チャレンジの記録</p>
         <% @goal.progresses.each do |progress| %>
             <% if progress.progress_image? %>
                 <%= image_tag progress.progress_image.url %>
@@ -130,16 +138,8 @@
     <% end %>
 </div>
 
+
 <%# コメント一覧表示 %>
-<% if @comment_error_catcher.present? %>
-        <h2><%= @comment_error_catcher.errors.count %> 件のエラーが発生しました。</h2>
-        <ul>
-        <% @comment_error_catcher.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-        <% end %>
-        </ul>
-        <hr>
-    <% end %>
 <div class="comment-wrapper">
     <p>コメント一覧</p>
     <hr>
@@ -155,11 +155,21 @@
         <hr>
     <% end %>
 </div>
+<%# コメント投稿エラーメッセージ %>
+<% if @comment_error_catcher.present? %>
+    <h2><%= @comment_error_catcher.errors.count %> 件のエラーが発生しました。</h2>
+    <ul>
+        <% @comment_error_catcher.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+    <hr>
+<% end %>
 
 <%# コメント投稿欄 %>
 <% if user_signed_in? %>
     <%= form_for [current_user , @goal, @comment],url:user_goal_comments_path(current_user, @goal) do |f| %>
-        <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+        <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントを残しましょう。" %>
         <%= f.submit "送信する", class: "comment-submit btn-lg btn-base-1 mt-20 pull-right" %>
     <% end %>
 <% end %>
@@ -179,6 +189,7 @@
     }
     var recale = function() {
         var counter = countdown(limit);
+        // カウントが０になったらreturnで処理を停める
         if(counter["days"] <= 0 && counter["hours"] <= 0 && counter["min"] <= 0 && counter["sec"] <= 0){
             document.getElementById('timer-text').textContent = "チャレンジ終了！達成できましたか？";
             return

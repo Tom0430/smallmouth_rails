@@ -12,5 +12,5 @@ class User < ApplicationRecord
     presence: true,
     length: { minimum: 2, maximum: 20 }
   validates :profile_text,
-    length: { maximum: 100}
+    length: { maximum: 500}
 end
