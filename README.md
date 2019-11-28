@@ -1,26 +1,30 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# SmallMouth
+ 
+目標管理＋SNSアプリです。
+<img width="1440" alt="スクリーンショット 2019-11-28 14 58 19" src="https://user-images.githubusercontent.com/53653372/69780811-a4534d00-11ef-11ea-8001-d00f47e21ca1.png">
 
-Things you may want to cover:
+## 簡単な説明
+他人に見られていたり宣言しないとやらないひとのための小さな目標管理アプリです。
+投稿できる目標は最短１分、最長１週間で達成できる小さなものに限定します。
+Twitterのようなタイムライン形式でにユーザーの目標と結果が一覧表示されます。
+ 
+## 機能
+ 
+- 目標投稿機能
+- 制限時間タイマー
+- 検索機能
+- 評価機能
+- ランキング機能
+ 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# small_mouth
-# smallmouth_rails
+## 使い方
+ 
+1. 会員登録後、サイドバーから『新しいチャレンジ』クリック
+2. チャレンジ（目標）のタイトルと詳細、期限を決めて投稿
+3. 結果を入力し、コメントや記録を残す。
+4. 『みんなのチャレンジ』をクリックして他のユーザーの投稿をクリック
+5. 評価、コメントする。
+ 
+## 作者
+mail to: qwdvgy03@gmail.com

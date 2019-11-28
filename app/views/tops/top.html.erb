@@ -10,11 +10,15 @@
     <%= link_to"新しいチャレンジ", new_user_goal_path(current_user.id) %>
     <hr>
 <% else %>
-    <%= link_to"新規ユーザー登録", new_user_registration_path %>
+    <p><%= link_to"新規ユーザー登録", new_user_registration_path %></p>
+    <p>テストユーザーで登録せずログインもできますのでご利用ください。</p>
     <hr>
     <p>すでに会員の方は<%= link_to"ログイン", new_user_session_path %></p>
     <hr>
 <% end %>
-    <p><%= link_to"みんなのチャレンジ", goals_path %>をみる</p>
-    <hr>
-    <p>詳しい使い方は<%= link_to"こちら", about_path %></p>
+<p><%= link_to"みんなのチャレンジ", goals_path %>を見る</p>
+<hr>
+<p>詳しい使い方は<%= link_to"こちら", about_path %></p>
+
+
+

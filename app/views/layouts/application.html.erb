@@ -12,77 +12,75 @@
 </head>
 
 <body>
-    <%# ヘッダー %>
-    <section class="header">
-      <%#!--Navbar-- %>
-      <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-        <%#!-- Navbar brand -- %>
-        <div class="navbar-brand" href="#">
-          <span><%= link_to "SmallMouth", root_path %></span>
-          <span><%= image_tag("mouse.png", :id => "mouse_img", :size =>'30x30')%></span>
-        </div>
-        <%# -- Collapsible content -- %>
-        <div class="collapse navbar-collapse" id="basicExampleNav">
-
-            <div class="md-form">
-              <%= form_tag(goals_path,method: :get) do %>
-                  <%= text_field_tag :search, "", placeholder: "応援したいユーザー、チャレンジを検索" %>
-                  <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil, :id => 'headersubmit' %>
-              <% end %>
-            </div>
-
-        </div>
-        <%# -- Collapsible content -- %>
-      </nav>
-      <%#!--Navbar-- %>
-    </section>
-    <%# ヘッダー %>
-
-    <div>
-      <div class="row">
-        <div class="col-md-2">
-          <!-- サイドバー -->
-          <div id="sidebar">
-            <% if user_signed_in? %>
-              <div>
-                <% if current_user.image.present? %>
-                  <%= image_tag current_user.image.url, size:'100x100', class:"user_image" %>
-                <% else %>
-                  <%= image_tag "noimage.png", :size => '100x100', class:"user_image" %>
-                <% end %>
-              </div>
-              <div class="banner"><%= current_user.name %>さん</div>
-              <div class="banner"><%= link_to "マイページ", user_path(current_user.id) %></div>
-              <div class="banner">
-                <% if current_user.goals.where(status: 0).present? %>
-                  <%= link_to"継続中のチャレンジ", trying_list_user_path(current_user.id) %>
-                <% end %>
-              </div>
-              <div class="banner"><%= link_to"新しいチャレンジ", new_user_goal_path(current_user.id) %></div>
-              <div class="banner"><%= link_to"ランキング", ranking_path %></div>
-              <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
-              <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
-              <div class="banner"><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></div>
-              <div class="banner"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
-            <% else %>
-              <div class="banner"><%= link_to "新規会員登録", new_user_registration_path %></div>
-              <div class="banner"><%= link_to "ログイン", new_user_session_path %></div>
-              <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
-              <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
-            <% end %>
-          </div>
-          <!-- サイドバー -->
-        </div>
-        <div class="col-md-10">
-          <%= yield %>
+  <%# ヘッダー %>
+  <section class="header">
+    <%#!--Navbar-- %>
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+      <%#!-- Navbar brand -- %>
+      <div class="navbar-brand" href="#">
+        <span><%= link_to "SmallMouth", root_path %></span>
+        <span><%= image_tag("mouse.png", :id => "mouse_img", :size =>'30x30')%></span>
+      </div>
+      <%# -- Collapsible content -- %>
+      <div class="collapse navbar-collapse" id="basicExampleNav">
+        <div class="md-form">
+          <%= form_tag(goals_path,method: :get) do %>
+              <%= text_field_tag :search, "", placeholder: "応援したいユーザー、チャレンジを検索" %>
+              <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil, :id => 'headersubmit' %>
+          <% end %>
         </div>
       </div>
+      <%# -- Collapsible content -- %>
+    </nav>
+    <%#!--Navbar-- %>
+  </section>
+  <%# ヘッダー %>
+
+  <div>
+    <div class="row">
+      <div class="col-md-2">
+        <!-- サイドバー -->
+        <div id="sidebar">
+          <% if user_signed_in? %>
+            <div>
+              <% if current_user.image.present? %>
+                <%= image_tag current_user.image.url, size:'100x100', class:"user_image" %>
+              <% else %>
+                <%= image_tag "noimage.png", :size => '100x100', class:"user_image" %>
+              <% end %>
+            </div>
+            <div class="banner"><%= current_user.name %>さん</div>
+            <div class="banner"><%= link_to "マイページ", user_path(current_user.id) %></div>
+            <div class="banner">
+              <% if current_user.goals.where(status: 0).present? %>
+                <%= link_to"継続中のチャレンジ", trying_list_user_path(current_user.id) %>
+              <% end %>
+            </div>
+            <div class="banner"><%= link_to"新しいチャレンジ", new_user_goal_path(current_user.id) %></div>
+            <div class="banner"><%= link_to"ランキング", ranking_path %></div>
+            <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
+            <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
+            <div class="banner"><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></div>
+            <div class="banner"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+          <% else %>
+            <div class="banner"><%= link_to "新規会員登録", new_user_registration_path %></div>
+            <div class="banner"><%= link_to "ログイン", new_user_session_path %></div>
+            <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
+            <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
+          <% end %>
+        </div>
+        <!-- サイドバー -->
+      </div>
+      <div class="col-md-10">
+        <%= yield %>
+      </div>
     </div>
-    <!-- フッター -->
-    <footer class="#fbc02d yellow darken-2">
-      <span class="toTop">ページトップへ</s>
-    </footer>
-    <!-- フッター -->
+  </div>
+  <!-- フッター -->
+  <footer class="#fbc02d yellow darken-2">
+    <span class="toTop">ページトップへ</s>
+  </footer>
+  <!-- フッター -->
 </body>
 
 </html>
