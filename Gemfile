@@ -64,7 +64,7 @@ gem 'enum_help'
 gem 'seed-fu', '~> 2.3'
 gem 'devise-i18n'
 gem 'rails-i18n'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'jquery-rails'
 gem 'kaminari', '~> 1.1.1'
 
