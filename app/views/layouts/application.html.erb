@@ -65,7 +65,7 @@
             <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
             <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
             <div class="banner"><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></div>
-            <div class="banner"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+            <div class="banner"><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %></div>
           <% else %>
             <div class="banner"><%= link_to "新規会員登録", new_user_registration_path %></div>
             <div class="banner"><%= link_to "ログイン", new_user_session_path %></div>

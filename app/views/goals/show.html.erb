@@ -131,7 +131,7 @@
                 <%= progress.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
             <% end %>
             <% if user_signed_in? && current_user.admin? %>
-                <%= link_to "delete", user_goal_progress_path(@goal.user, @goal, progress), method: :delete,data: { confirm: "本当に削除しますか?" } %>
+                <%= button_to "削除", user_goal_progress_path(@goal.user, @goal, progress), method: :delete,data: { confirm: "本当に削除しますか?" } %>
             <% end %>
             <hr>
         <% end %>
@@ -150,7 +150,7 @@
         <% end %>
         <%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
         <% if user_signed_in? && current_user.admin? %>
-            <%= link_to "delete", user_goal_comment_path(comment.user, @goal, comment), method: :delete,data: { confirm: "本当に削除しますか?" } %>
+            <%= button_to "delete", user_goal_comment_path(comment.user, @goal, comment), method: :delete,data: { confirm: "本当に削除しますか?" } %>
         <% end %>
         <hr>
     <% end %>

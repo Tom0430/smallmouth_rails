@@ -40,7 +40,7 @@
                 </div>
                 <%# 枠線の色を変えるdiv ここまで %>
                 <% if user_signed_in? && current_user.admin? %>
-                    <%= link_to "削除", user_goal_path(goal.user_id,goal.id), method: :delete,data: { confirm: "本当に削除しますか?" } %>
+                    <%= button_to "削除", user_goal_path(goal.user_id,goal.id), method: :delete,data: { confirm: "本当に削除しますか?" } %>
                 <% end %>
             </div>
         </div>
