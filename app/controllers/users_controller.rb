@@ -27,6 +27,11 @@ class UsersController < ApplicationController
         end
     end
 
+    def destroy
+        @user.delete
+        redirect_to users_path
+    end
+
     def trying_list
         # 自身の投稿は非公開でもリストに表示できるように設定 achieved,failed_listも同様
         @goals = user_signed_in? && current_user.id == @user.id ? goals_list(0).order(id: "DESC") : goals_list(0).where(published: true).order(id: "DESC")

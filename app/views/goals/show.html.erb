@@ -22,14 +22,14 @@
 
 <%# チャレンジの公開、非公開の表示 %>
 <% if user_signed_in? && current_user.id == @goal.user.id %>
-    <% if @goal.published == true %>
+    <% if @goal.published %>
         <%= "このチャレンジは公開中です" %>
-    <% else @goal.published == false %>
+    <% else %>
         <%= "このチャレンジは非公開です。非公開中のチャレンジの獲得チーズ数はランキングにカウントされません" %>
     <% end %>
     <%# チャレンジの公開、非公開を切り替える処理 %>
     <%= form_for @goal, url: user_goal_path(current_user, @goal),method: "patch" do  |f| %>
-        <% if @goal.published == true %>
+        <% if @goal.published %>
             <%= f.hidden_field :published, :value => 0 %>
             <%= f.submit "このチャレンジを非公開にする", class: "btn-lg btn-base-1 mt-20 pull-right" %>
         <% else %>
@@ -41,11 +41,11 @@
 <% end %>
 
 <%# カウントダウンタイマー表示 時間経過,結果を選択後表示の切り替え %>
-<% if user_signed_in? && @goal.status == "trying" && @goal.user.id == current_user.id %>
+<% if user_signed_in? && @goal.status == "trying" %>
     <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
     <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user, @goal) %></div>
     <div><%= link_to "達成できなかった", failed_user_goal_path(@goal.user, @goal) %></div>
-<% elsif user_signed_in? && @goal.status != "trying" && @goal.user.id == current_user.id  %>
+<% elsif user_signed_in? && @goal.status != "trying" %>
     <%= "このチャレンジは終了しました" %>
 <% end %>
 
@@ -174,7 +174,7 @@
     <% end %>
 <% end %>
 
-<script>
+<script type="text/javascript">
     // カウントダウンタイマー
     var limit = new Date("<%= @goal.remaining_time %>");
     var countdown = function(limit_due) {
@@ -183,31 +183,31 @@
         var sec = Math.floor(rest / 1000 % 60);
         var min = Math.floor(rest / 1000 / 60) % 60;
         var hours = Math.floor(rest / 1000 / 60 / 60) % 24;
-        var days = Math.floor(rest/ 1000 / 60 / 60 / 24 )
+        var days = Math.floor(rest/ 1000 / 60 / 60 / 24 );
         var count_hash = {days: days, hours: hours, min: min, sec: sec}
         return count_hash;
     }
     var recale = function() {
         var counter = countdown(limit);
-        // カウントが０になったらreturnで処理を停める
-        if(counter["days"] <= 0 && counter["hours"] <= 0 && counter["min"] <= 0 && counter["sec"] <= 0){
-            document.getElementById('timer-text').textContent = "チャレンジ終了！達成できましたか？";
-            return
-        }
-        else{
-            one_second_recale_refresh();
-        }
         var time = counter["days"] + '日' + counter["hours"] + '時間' + counter["min"] + '分' + counter["sec"] + '秒';
-        document.getElementById('timer').textContent = time;
+        if(document.getElementById('timer')){
+            document.getElementById('timer').textContent = time
+            // カウントが０になったらreturnで処理を停める
+            if(counter["days"] <= 0 && counter["hours"] <= 0 && counter["min"] <= 0 && counter["sec"] <= 0){
+                document.getElementById('timer-text').textContent = "チャレンジ終了！達成できましたか？";
+                return
+            }
+            else{
+                one_second_recale_refresh();
+            }
+        }
     }
 
     var one_second_recale_refresh = function() {
         setTimeout(recale, 1000)
     }
     recale();
-</script>
 
-<script type="text/javascript">
     //チーズの画像で評価機能
     $(".blacks").click(function(){
         // 黄色いチーズ、黒いチーズの元画像を指定

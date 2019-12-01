@@ -4,7 +4,7 @@ class ProgressesController < ApplicationController
       progress = @goal.progresses.new(progress_params)
       progress.goal_id = @goal.id
       if progress.save
-        redirect_to user_goal_path(goal.user.id, goal.id)
+        redirect_to user_goal_path(@goal.user.id, @goal.id)
       else
         @progress_error_catcher = progress
         @progress = progress

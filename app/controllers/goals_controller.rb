@@ -22,6 +22,11 @@ class GoalsController < ApplicationController
         redirect_to user_goal_path(current_user.id, @goal.id)
     end
 
+    def destroy
+        @goal.delete
+        redirect_to goals_path
+    end
+
     def index
         # 検索したときには検索結果を、そうでない時は全チャレンジを一覧表示 一覧画面では公開されたチャレンジのみ表示する
         # gem Kaminariでpagenation
