@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap"; 
+@import "bootstrap";
  * {
     margin: 0;
     padding: 0;
@@ -121,13 +121,11 @@ footer{
     background-color: #FFDC39;
 }
 
-.toTop {
+.to_github {
     padding-top: 10px;
-    float: right;
     display: inline-block;
-    background: #327AB7;
+    background-color: #327AB7;
     color: #fff;
-    cursor: pointer;
 }
 
 .box{
