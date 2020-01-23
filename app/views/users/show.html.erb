@@ -1,11 +1,3 @@
-<%# エラ-メッセージ表示 %>
-<% if flash[:notice] %>
-    <hr>
-    <div class="flash">
-        <%= flash[:notice] %>
-    </div>
-    <hr>
-<% end %>
 <h3>ユーザー情報</h3>
 
 <% if @user.image? %>

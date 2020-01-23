@@ -1,102 +1,90 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>SmallMouth</title>
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
+  <head>
+    <title>SmallMouth</title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<body>
-  <%# ヘッダー %>
-  <section class="header">
-    <%#!--Navbar-- %>
-    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-      <%#!-- Navbar brand -- %>
-      <div class="navbar-brand" href="#">
-        <span><%= link_to "SmallMouth", root_path %></span>
-        <span><%= image_tag("mouse.png", :id => "mouse_img", :size =>'30x30')%></span>
-      </div>
-      <%# -- Collapsible content -- %>
-      <div class="collapse navbar-collapse" id="basicExampleNav">
-        <div class="md-form">
-          <%= form_tag(goals_path,method: :get) do %>
-              <%= text_field_tag :search, "", placeholder: "応援したいユーザー、チャレンジを検索" %>
-              <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil, :id => 'headersubmit' %>
-          <% end %>
+  <body>
+    <%# ヘッダー %>
+    <section class="header">
+      <%#!--Navbar-- %>
+      <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+        <%#!-- Navbar brand -- %>
+        <div class="navbar-brand" href="#">
+          <span><%= link_to "SmallMouth", root_path %></span>
+          <span><%= image_tag("mouse.png", :id => "mouse_img", :size =>'30x30')%></span>
         </div>
-      </div>
-      <%# -- Collapsible content -- %>
-    </nav>
-    <%#!--Navbar-- %>
-  </section>
-  <%# ヘッダー %>
+        <%# -- Collapsible content -- %>
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+          <div class="md-form">
+            <%= form_tag(goals_path,method: :get) do %>
+                <%= text_field_tag :search, "", placeholder: "応援したいユーザー、チャレンジを検索" %>
+                <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil, :id => 'headersubmit' %>
+            <% end %>
+          </div>
+        </div>
+        <%# -- Collapsible content -- %>
+      </nav>
+      <%#!--Navbar-- %>
+    </section>
+    <%# ヘッダー %>
 
-  <div>
-    <div class="row">
-      <div class="col-md-2">
-        <!-- サイドバー -->
-        <div id="sidebar">
-          <% if user_signed_in? %>
-            <div>
-              <% if current_user.image.present? %>
-                <%= image_tag current_user.image.url, size:'100x100', class:"user_image" %>
-              <% else %>
-                <%= image_tag "noimage.png", :size => '100x100', class:"user_image" %>
-              <% end %>
-            </div>
-            <div class="banner"><%= current_user.name %>さん</div>
-            <div class="banner"><%= link_to "マイページ", user_path(current_user.id) %></div>
-            <div class="banner">
-              <% if current_user.goals.where(status: 0).present? %>
-                <%= link_to"継続中のチャレンジ", trying_list_user_path(current_user.id) %>
-              <% end %>
-            </div>
-            <div class="banner"><%= link_to"新しいチャレンジ", new_user_goal_path(current_user.id) %></div>
-            <div class="banner"><%= link_to"ランキング", ranking_path %></div>
-            <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
-            <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
-            <div class="banner"><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></div>
-            <div class="banner"><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %></div>
-          <% else %>
-            <div class="banner"><%= link_to "新規会員登録", new_user_registration_path %></div>
-            <div class="banner"><%= link_to "ログイン", new_user_session_path %></div>
-            <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
-            <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
-          <% end %>
+    <div>
+      <div class="row">
+        <div class="col-md-2">
+          <!-- サイドバー -->
+          <div id="sidebar">
+            <% if user_signed_in? %>
+              <div>
+                <% if current_user.image.present? %>
+                  <%= image_tag current_user.image.url, size:'100x100', class:"user_image" %>
+                <% else %>
+                  <%= image_tag "noimage.png", :size => '100x100', class:"user_image" %>
+                <% end %>
+              </div>
+              <div class="banner"><%= current_user.name %>さん</div>
+              <div class="banner"><%= link_to "マイページ", user_path(current_user.id) %></div>
+              <div class="banner">
+                <% if current_user.goals.where(status: 0).present? %>
+                  <%= link_to"継続中のチャレンジ", trying_list_user_path(current_user.id) %>
+                <% end %>
+              </div>
+              <div class="banner"><%= link_to"新しいチャレンジ", new_user_goal_path(current_user.id) %></div>
+              <div class="banner"><%= link_to"ランキング", ranking_path %></div>
+              <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
+              <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
+              <div class="banner"><%= link_to"プロフィール編集", edit_user_path(current_user.id) %></div>
+              <div class="banner"><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %></div>
+            <% else %>
+              <div class="banner"><%= link_to "新規会員登録", new_user_registration_path %></div>
+              <div class="banner"><%= link_to "ログイン", new_user_session_path %></div>
+              <div class="banner"><%= link_to "みんなのチャレンジ", goals_path %></div>
+              <div class="banner"><%= link_to "チャレンジャー一覧", users_path %></div>
+            <% end %>
+          </div>
+          <!-- サイドバー -->
         </div>
-        <!-- サイドバー -->
-      </div>
-      <div class="col-md-10">
-        <%= yield %>
+        <div class="col-md-10">
+          <%= yield %>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- フッター -->
-  <footer class="#fbc02d yellow darken-2">
-    <span class="toTop">ページトップへ</s>
-  </footer>
-  <!-- フッター -->
-</body>
+    <!-- フッター -->
+    <footer class="#fbc02d yellow darken-2">
+    <div class="to_github"><%= link_to "Github", "https://github.com/Tom0430/smallmouth_rails" %></div>
+    </footer>
+    <!-- フッター -->
+  </body>
 
 </html>
-
-<script>
-  $(function () {
-    $('.toTop').click(function () {
-
-      $('body,html').animate({
-        scrollTop: 0
-      }, 800);
-      return false;
-    });
-  });
-</script>
