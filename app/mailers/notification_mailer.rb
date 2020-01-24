@@ -10,4 +10,14 @@ class NotificationMailer < ActionMailer::Base
         format.text
       end
     end
+
+    def send_limit_to_user(user)
+      @user = user
+      mail(
+        subject: "目標の期限が迫っております。", #メールのタイトル
+        to: @user.email #宛先
+      ) do |format|
+        format.text
+      end
+    end
   end

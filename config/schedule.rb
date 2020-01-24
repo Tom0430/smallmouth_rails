@@ -10,5 +10,5 @@ set :environment, rails_env
 set :output, "#{Rails.root}/log/cron.log"
 # 1分毎に回す
 every 1.minute do
-  command "echo 'mossmossmossmossmossmoss'"
+    # rake "send_limit:send_limit"
 end
