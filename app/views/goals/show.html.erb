@@ -40,7 +40,7 @@
     <hr>
 <% end %>
 
-<%# カウントダウンタイマー表示 時間経過,結果を選択後表示の切り替え %>
+<%# カウントダウンタイマー表示 時間経過する。結果を選択後表示の切り替え %>
 <% if user_signed_in? && @goal.status == "trying" %>
     <p id ="timer-text">あと<span id = "timer"></span>でチャレンジ終了！</p>
     <div><%= link_to "達成できた", achieved_user_goal_path(@goal.user, @goal) %></div>

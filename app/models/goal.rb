@@ -19,17 +19,17 @@ class Goal < ApplicationRecord
     def remaining_time
         now = self.created_at
         case self.limit_time_before_type_cast
-        when 0 then
-            remaining_time = now + 60
-        when 1 then
-            remaining_time = now + 60 * 60 * 8
-        when 2 then
-            remaining_time = now + 60 * 60 * 24
-        when 3 then
-            remaining_time = now + 60 * 60 * 72
-        when 4 then
-            remaining_time = now + 60 * 60 * 168
-        end
+            when 0 then
+                remaining_time = now + 60
+            when 1 then
+                remaining_time = now + 60 * 60 * 8
+            when 2 then
+                remaining_time = now + 60 * 60 * 24
+            when 3 then
+                remaining_time = now + 60 * 60 * 72
+            when 4 then
+                remaining_time = now + 60 * 60 * 168
+            end
         return remaining_time
     end
 
