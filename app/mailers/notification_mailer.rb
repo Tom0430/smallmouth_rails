@@ -1,5 +1,5 @@
 class NotificationMailer < ActionMailer::Base
-    default from: "hogehoge@example.com"
+    default from: "qwdvgy03@gmail.com"
 
     def send_confirm_to_user(user)
       @user = user
@@ -11,10 +11,11 @@ class NotificationMailer < ActionMailer::Base
       end
     end
 
-    def send_limit_to_user(user)
+    def send_limit_to_user(user, goal)
       @user = user
+      @goal = goal
       mail(
-        subject: "目標の期限が迫っております。", #メールのタイトル
+        subject: "チャレンジの期限が残り3日となりました。", #メールのタイトル
         to: @user.email #宛先
       ) do |format|
         format.text

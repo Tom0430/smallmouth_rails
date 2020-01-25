@@ -26,14 +26,33 @@
     <% else %>
         <%= "現在、新しく作成したチャレンジはすべて非公開にする設定になっています。非公開中のチャレンジの獲得チーズ数はランキングにカウントされません" %>
     <% end %>
+
     <%# チャレンジの公開、非公開のデフォルト設定を切り替える処理 %>
-    <%= form_for @user, url: user_change_default_published_path(@user),method: "patch" do  |f| %>
+    <%= form_for @user, url: user_change_default_published_path(current_user),method: "patch" do  |f| %>
         <% if @user.default_published == true %>
             <%= f.hidden_field :default_published, :value => 0 %>
             <%= f.submit "チャレンジをデフォルトで非公開にする", class: "btn-lg btn-base-1 mt-20 pull-right" %>
         <% else %>
             <%= f.hidden_field :default_published, :value => 1 %>
             <%= f.submit "チャレンジをデフォルトで公開する", class: "btn-lg btn-base-1 mt-20 pull-right" %>
+        <% end %>
+    <% end %>
+    <hr>
+    <%# メールの受け取り設定を切り替える処理 %>
+    <%= "１週間のチャレンジに挑戦する際は、期間中にご確認のメールを送信しています。" %>
+    <% if @user.accept_recieving_email == true %>
+        <%= "現在、メールを受け取る設定になっています。"%>
+    <% else %>
+        <%= "現在、メールの送信を受け取らない設定になってています"%>
+    <% end %>
+
+    <%= form_for @user, url: user_change_accept_email_path(current_user),method: "patch" do  |f| %>
+        <% if @user.accept_recieving_email == true %>
+            <%= f.hidden_field :accept_recieving_email, :value => 0 %>
+            <%= f.submit "１週間の挑戦期間中にメールを受け取らない", class: "btn-lg btn-base-1 mt-20 pull-right" %>
+        <% else %>
+            <%= f.hidden_field :accept_recieving_email, :value => 1 %>
+            <%= f.submit "１週間の挑戦期間中にメールを受け取る", class: "btn-lg btn-base-1 mt-20 pull-right" %>
         <% end %>
     <% end %>
 <% end %>

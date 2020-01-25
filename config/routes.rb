@@ -8,6 +8,8 @@ resources :users do
   get :achieved_list, on: :member
   get :failed_list, on: :member
   patch :change_default_published
+  patch :change_accept_email
+
   resources :goals, :except => :index do
     get :achieved, on: :member
     get :failed, on: :member

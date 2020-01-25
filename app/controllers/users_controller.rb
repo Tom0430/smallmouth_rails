@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :set_user, except: [:index, :change_default_published]
+    before_action :set_user, except: [:index, :change_default_published, :change_accept_email]
 
     def index
         users = User.all.includes([goals: :rates])
@@ -50,9 +50,15 @@ class UsersController < ApplicationController
         redirect_to user_path(user.id)
     end
 
+    def change_accept_email
+        user = User.find(params[:user_id])
+        user.update(accept_recieving_email: params[:user][:accept_recieving_email])
+        redirect_to user_path(user.id)
+    end
+
     private
     def user_params
-        params.require(:user).permit(:name, :profile_text, :image, :default_published)
+        params.require(:user).permit(:name, :profile_text, :image, :default_published, :accept_recieving_email)
     end
 
     def set_user

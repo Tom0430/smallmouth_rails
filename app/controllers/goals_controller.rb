@@ -8,7 +8,6 @@ class GoalsController < ApplicationController
     def create
         goal = Goal.new(goal_params)
         goal.user_id = current_user.id
-        binding.pry
         if goal.user.default_published == true
             goal.published = true
         else
