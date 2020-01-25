@@ -12,8 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    if user.save
-      NotificationMailer.send_confirm_to_user(user).deliver
+    if @user.save
+      NotificationMailer.send_confirm_to_user(@user).deliver
     end
   end
 

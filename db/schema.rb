@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_093013) do
     t.integer "limit_time", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "published", default: true, null: false
+    t.boolean "published"
   end
 
   create_table "progresses", force: :cascade do |t|
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_093013) do
     t.string "name", null: false
     t.text "profile_text"
     t.string "image"
+    t.boolean "default_published", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "admin", default: false

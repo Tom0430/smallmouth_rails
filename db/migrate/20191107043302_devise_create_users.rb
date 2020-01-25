@@ -34,6 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string   :name, null: false
       t.text   :profile_text
       t.string   :image
+      t.boolean   :default_published, default: true, null: false
 
       t.timestamps null: false
     end

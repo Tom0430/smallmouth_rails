@@ -7,6 +7,7 @@ resources :users do
   get :trying_list, on: :member
   get :achieved_list, on: :member
   get :failed_list, on: :member
+  patch :change_default_published
   resources :goals, :except => :index do
     get :achieved, on: :member
     get :failed, on: :member
