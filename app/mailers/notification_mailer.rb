@@ -15,7 +15,7 @@ class NotificationMailer < ActionMailer::Base
       @user = user
       @goal = goal
       mail(
-        subject: "チャレンジの期限が残り3日となりました。", #メールのタイトル
+        subject: "チャレンジの期限が迫ってきております。", #メールのタイトル
         to: @user.email #宛先
       ) do |format|
         format.text
