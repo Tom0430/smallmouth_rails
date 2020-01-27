@@ -1,5 +1,5 @@
 <hr>
-<h3>達成できなかった目標一覧...</h3>
+<h3>達成できなかったチャレンジはこちら...</h3>
 <hr>
 <% @goals.each do |goal| %>
     <%= link_to user_goal_path(goal.user.id, goal.id) do %>
@@ -9,4 +9,3 @@
     <% end %>
     <hr>
 <% end %>
-

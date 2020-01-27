@@ -33,15 +33,15 @@ class UsersController < ApplicationController
 
     def trying_list
         # 自身の投稿は非公開でもリストに表示できるように設定 achieved,failed_listも同様
-        @goals = user_signed_in? && current_user.id == @user.id ? goals_list(0).order(id: "DESC") : goals_list(0).where(published: true).order(id: "DESC")
+       @goals = goals_list(0)
     end
 
     def achieved_list
-        @goals = user_signed_in? && current_user.id == @user.id ? goals_list(1).order(id: "DESC") : goals_list(1).where(published: true).order(id: "DESC")
+        @goals = goals_list(1)
     end
 
     def failed_list
-        @goals = user_signed_in? && current_user.id == @user.id ? goals_list(2).order(id: "DESC") : goals_list(2).where(published: true).order(id: "DESC")
+        @goals = goals_list(2)
     end
 
     def change_default_published

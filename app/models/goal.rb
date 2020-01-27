@@ -36,4 +36,8 @@ class Goal < ApplicationRecord
     def rated_by?(user)
         rates.where(user_id: user.id).exists?
     end
+
+    def goals_list(status)
+        user_signed_in? && current_user.id == @user.id ? goals_list(status).order(id: "DESC") : goals_list(status).where(published: true).order(id: "DESC")
+    end
 end
