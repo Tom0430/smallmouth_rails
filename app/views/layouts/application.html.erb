@@ -28,10 +28,7 @@
         <%# -- Collapsible content -- %>
         <div class="collapse navbar-collapse" id="basicExampleNav">
           <div class="md-form">
-            <%= form_tag(goals_path,method: :get) do %>
-                <%= text_field_tag :search, "", placeholder: "応援したいユーザー、チャレンジを検索" %>
-                <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', :name => nil, :id => 'headersubmit' %>
-            <% end %>
+            <div class="to_github"><%= link_to "Github", "https://github.com/Tom0430/smallmouth_rails" %></div>
           </div>
         </div>
         <%# -- Collapsible content -- %>
@@ -82,7 +79,6 @@
     </div>
     <!-- フッター -->
     <footer class="#fbc02d yellow darken-2">
-    <div class="to_github"><%= link_to "Github", "https://github.com/Tom0430/smallmouth_rails" %></div>
     </footer>
     <!-- フッター -->
   </body>

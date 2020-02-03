@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
 resources :users do
   get :trying_list, on: :member
   get :achieved_list, on: :member
   get :failed_list, on: :member
+  patch :change_default_published
+  patch :change_accept_email
+
   resources :goals, :except => :index do
     get :achieved, on: :member
     get :failed, on: :member

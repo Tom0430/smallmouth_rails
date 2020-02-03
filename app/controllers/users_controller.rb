@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :set_user, except: [:index,:update]
+    before_action :set_user, except: [:index, :change_default_published, :change_accept_email]
 
     def index
         users = User.all.includes([goals: :rates])
@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     end
 
     def update
-        user = User.find(params[:id])
         if user.update(user_params)
             flash[:notice] = "情報を更新しました。"
             redirect_to user_path(user.id)
@@ -34,20 +33,32 @@ class UsersController < ApplicationController
 
     def trying_list
         # 自身の投稿は非公開でもリストに表示できるように設定 achieved,failed_listも同様
-        @goals = user_signed_in? && current_user.id == @user.id ? goals_list(0).order(id: "DESC") : goals_list(0).where(published: true).order(id: "DESC")
+       @goals = goals_list(0)
     end
 
     def achieved_list
-        @goals = user_signed_in? && current_user.id == @user.id ? goals_list(1).order(id: "DESC") : goals_list(1).where(published: true).order(id: "DESC")
+        @goals = goals_list(1)
     end
 
     def failed_list
-        @goals = user_signed_in? && current_user.id == @user.id ? goals_list(2).order(id: "DESC") : goals_list(2).where(published: true).order(id: "DESC")
+        @goals = goals_list(2)
+    end
+
+    def change_default_published
+        user = User.find(params[:user_id])
+        user.update(default_published: params[:user][:default_published])
+        redirect_to user_path(user.id)
+    end
+
+    def change_accept_email
+        user = User.find(params[:user_id])
+        user.update(accept_recieving_email: params[:user][:accept_recieving_email])
+        redirect_to user_path(user.id)
     end
 
     private
     def user_params
-        params.require(:user).permit(:name, :profile_text, :image)
+        params.require(:user).permit(:name, :profile_text, :image, :default_published, :accept_recieving_email)
     end
 
     def set_user

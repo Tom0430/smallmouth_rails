@@ -67,6 +67,7 @@ gem 'rails-i18n'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 gem 'kaminari', '~> 1.1.1'
+gem 'whenever', :require => false
 
 
 group :production do

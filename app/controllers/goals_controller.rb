@@ -8,6 +8,11 @@ class GoalsController < ApplicationController
     def create
         goal = Goal.new(goal_params)
         goal.user_id = current_user.id
+        if goal.user.default_published == true
+            goal.published = true
+        else
+            goal.published = false
+        end
         if goal.save
             redirect_to user_goal_path(goal.user.id, goal.id)
         else
@@ -29,18 +34,8 @@ class GoalsController < ApplicationController
 
     def index
         # 検索したときには検索結果を、そうでない時は全チャレンジを一覧表示 一覧画面では公開されたチャレンジのみ表示する
-        # gem Kaminariでpagenation
-        if params[:search].present?
-            title = Goal.where(published: true).where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
-            detail = Goal.where(published: true).where("detail LIKE ?", "%#{params[:search]}%").order(id: "DESC")
-            user = Goal.where(published: true).joins(:user).where("name LIKE ?", "%#{params[:search]}%").order(id: "DESC")
-            result = ( title | detail )
-            merged_search_result = ( result | user )
-            @goals = Kaminari.paginate_array(merged_search_result).page(params[:page]).per(10)
-        else
-            goals = Goal.where(published: true).includes([:user, :rates]).order(id: "DESC")
-            @goals = Kaminari.paginate_array(goals).page(params[:page]).per(9)
-        end
+        goals = Goal.where(published: true).includes([:user, :rates]).order(id: "DESC")
+        @goals = Kaminari.paginate_array(goals).page(params[:page]).per(10)
     end
 
     def show

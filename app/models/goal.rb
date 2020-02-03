@@ -19,21 +19,25 @@ class Goal < ApplicationRecord
     def remaining_time
         now = self.created_at
         case self.limit_time_before_type_cast
-        when 0 then
-            remaining_time = now + 60
-        when 1 then
-            remaining_time = now + 60 * 60 * 8
-        when 2 then
-            remaining_time = now + 60 * 60 * 24
-        when 3 then
-            remaining_time = now + 60 * 60 * 72
-        when 4 then
-            remaining_time = now + 60 * 60 * 168
-        end
+            when 0 then
+                remaining_time = now + 60
+            when 1 then
+                remaining_time = now + 60 * 60 * 8
+            when 2 then
+                remaining_time = now + 60 * 60 * 24
+            when 3 then
+                remaining_time = now + 60 * 60 * 72
+            when 4 then
+                remaining_time = now + 60 * 60 * 168
+            end
         return remaining_time
     end
 
     def rated_by?(user)
         rates.where(user_id: user.id).exists?
+    end
+
+    def goals_list(status)
+        user_signed_in? && current_user.id == @user.id ? goals_list(status).order(id: "DESC") : goals_list(status).where(published: true).order(id: "DESC")
     end
 end
