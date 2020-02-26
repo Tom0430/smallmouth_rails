@@ -9,11 +9,11 @@
 <%= @user.profile_text %>
 <hr>
 <p>今までに達成したチャレンジ</p>
-<p>1分のチャレンジ <%= @user.goals.where(limit_time: "limit1m" ).count %>個</p>
-<p>8時間のチャレンジ <%= @user.goals.where(limit_time: "limit8h" ).count %>個</p>
-<p>24時間のチャレンジ <%= @user.goals.where(limit_time: "limit1d" ).count %>個</p>
-<p>3日間のチャレンジ <%= @user.goals.where(limit_time: "limit3d" ).count %>個</p>
-<p>1週間のチャレンジ <%= @user.goals.where(limit_time: "limit1w" ).count %>個</p>
+<p>1分のチャレンジ <%= @user.goals.where(limit_time: "limit1m" ).where(status: "achieved" ).count %>個</p>
+<p>8時間のチャレンジ <%= @user.goals.where(limit_time: "limit8h" ).where(status: "achieved" ).count %>個</p>
+<p>24時間のチャレンジ <%= @user.goals.where(limit_time: "limit1d" ).where(status: "achieved" ).count %>個</p>
+<p>3日間のチャレンジ <%= @user.goals.where(limit_time: "limit3d" ).where(status: "achieved" ).count %>個</p>
+<p>1週間のチャレンジ <%= @user.goals.where(limit_time: "limit1w" ).where(status: "achieved" ).count %>個</p>
 <hr>
 <%= "総獲得チーズ数 " + @user.goals.joins(:rates).where(published: true).sum(:quantity).to_s + "個" %>
 <hr>
@@ -31,15 +31,15 @@
     <%= form_for @user, url: user_change_default_published_path(current_user),method: "patch" do  |f| %>
         <% if @user.default_published == true %>
             <%= f.hidden_field :default_published, :value => 0 %>
-            <%= f.submit "チャレンジをデフォルトで非公開にする", class: "btn-lg btn-base-1 mt-20 pull-right" %>
+            <%= f.submit "チャレンジをデフォルトで非公開にする", class: "btn-lg btn-base-1 mt-20" %>
         <% else %>
             <%= f.hidden_field :default_published, :value => 1 %>
-            <%= f.submit "チャレンジをデフォルトで公開する", class: "btn-lg btn-base-1 mt-20 pull-right" %>
+            <%= f.submit "チャレンジをデフォルトで公開する", class: "btn-lg btn-base-1 mt-20" %>
         <% end %>
     <% end %>
     <hr>
     <%# メールの受け取り設定を切り替える処理 %>
-    <%= "3日、または７日間のチャレンジを行う場合は、期限が迫った際にご確認のメールを送信しています。" %>
+    <p>3日、または７日間のチャレンジを行う場合は、期限が迫った際にご確認のメールを送信しています。<p>
     <% if @user.accept_recieving_email == true %>
         <%= "現在、メールを受け取る設定になっています。設定を変更するには以下のボタンをクリックしてください。"%>
     <% else %>
@@ -49,15 +49,15 @@
     <%= form_for @user, url: user_change_accept_email_path(current_user),method: "patch" do  |f| %>
         <% if @user.accept_recieving_email == true %>
             <%= f.hidden_field :accept_recieving_email, :value => 0 %>
-            <%= f.submit "１週間の挑戦期間中にメールを受け取らない", class: "btn-lg btn-base-1 mt-20 pull-right" %>
+            <%= f.submit "１週間の挑戦期間中にメールを受け取らない", class: "btn-lg btn-base-1 mt-20" %>
         <% else %>
             <%= f.hidden_field :accept_recieving_email, :value => 1 %>
-            <%= f.submit "１週間の挑戦期間中にメールを受け取る", class: "btn-lg btn-base-1 mt-20 pull-right" %>
+            <%= f.submit "１週間の挑戦期間中にメールを受け取る", class: "btn-lg btn-base-1 mt-20" %>
         <% end %>
     <% end %>
 <% end %>
 
-
+<hr>
 <%= link_to"挑戦中のチャレンジ一覧", trying_list_user_path %>
 <hr>
 <%= link_to"達成したチャレンジ一覧", achieved_list_user_path %>

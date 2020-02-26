@@ -34,8 +34,8 @@
 
 <div class="easy-login">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <%= f.hidden_field :email, value: "test1@test.com" %>
+    <%= f.hidden_field :email, value: "test@test.com" %>
     <%= f.hidden_field :password, value: "111111" %>
-    <%= f.submit "テストユーザーとしてかんたんログイン", class:"btn  btn-success"%> 
+    <%= f.submit "テストユーザーとしてかんたんログイン", class:"btn  btn-success"%>
   <% end %>
 </div>
