@@ -31,10 +31,10 @@
     <%= form_for @goal, url: user_goal_path(current_user, @goal),method: "patch" do  |f| %>
         <% if @goal.published %>
             <%= f.hidden_field :published, :value => 0 %>
-            <%= f.submit "このチャレンジを非公開にする", class: "btn-lg btn-base-1 mt-20 pull-right" %>
+            <%= f.submit "このチャレンジを非公開にする", class: "btn-lg btn-base-1 mt-20" %>
         <% else %>
             <%= f.hidden_field :published, :value => 1 %>
-            <%= f.submit "このチャレンジを公開する", class: "btn-lg btn-base-1 mt-20 pull-right" %>
+            <%= f.submit "このチャレンジを公開する", class: "btn-lg btn-base-1 mt-20" %>
         <% end %>
     <% end %>
     <hr>
@@ -113,7 +113,7 @@
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "チャレンジの記録をここに書いていきましょう、結果が出てからでもOKです。一緒に写真も投稿できます。" %>
         <%= f.label :"頑張った瞬間の写真を投稿しちゃおう！"%>
         <%= f.file_field :progress_image %>
-        <%= f.submit "送信する", class: "challege-submit btn-lg btn-base-1 mt-20 pull-right" %>
+        <%= f.submit "送信する", class: "challege-submit btn-lg btn-base-1 mt-20" %>
         <hr>
     <% end %>
 <% end %>
@@ -170,7 +170,7 @@
 <% if user_signed_in? %>
     <%= form_for [current_user , @goal, @comment],url:user_goal_comments_path(current_user, @goal) do |f| %>
         <%= f.text_area :body, rows:'5', class: "form-control",placeholder: "コメントを残しましょう。" %>
-        <%= f.submit "送信する", class: "comment-submit btn-lg btn-base-1 mt-20 pull-right" %>
+        <%= f.submit "送信する", class: "comment-submit btn-lg btn-base-1 mt-20" %>
     <% end %>
 <% end %>
 
