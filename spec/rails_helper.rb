@@ -35,9 +35,9 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
+  # ファクトリーボットの設定
   config.include FactoryBot::Syntax::Methods
-
+  # datebase_cleanerの設定
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
@@ -57,6 +57,7 @@ RSpec.configure do |config|
   config.after(:all) do
     DatabaseCleaner.clean
   end
+  # datebase_cleanerの設定 ここまで
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
