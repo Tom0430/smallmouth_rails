@@ -14,7 +14,6 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  # ファクトリーボットの設定
   config.before(:all) do
     FactoryBot.reload
   end
